@@ -1,0 +1,3 @@
+- lag en funksjon som kjører fortere gjennom videoer, aka dropper frames avhengig av tid brukt kontra fps
+- senk tolreansen på Sobel og Scharr, 40-80 typ, ser ut som om 70 er der vi ligger, kanskje lavere
+- fix otsu så den inverterer sub image hvis sub image er motsatt farge av sidebildet, si hvis over 50% ac pixlene er motsatt på sidebildet
