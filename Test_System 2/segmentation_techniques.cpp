@@ -224,14 +224,14 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
         }
 
 
-        //if(Otsu)
-        //{
-        //   output_img = Histogram_seg(histogram_percentile,edge_img,input_img);
-        //}
-        //else
-       // {
+        if(Otsu)
+        {
+           output_img = Histogram_seg(histogram_percentile,edge_img,input_img);
+        }
+        else
+        {
             output_img = Histogram_seg(histogram_percentile,edge_img);
-       // }
+        }
     }
 
 
@@ -739,7 +739,7 @@ cv::Mat Adaptive_Thresholding(cv::Mat input_img,int kernel_size, int C,bool Gaus
 //using sub_images of a tenth of the original rowsize
 //equalize so that each aub image gets the same average intensity
 //as the first ten rows.
-cv::Mat Light_gradient_equalizer(cv::Mat input_image)
+cv::Mat Light_gradient_equalizer(cv::Mat input_image,bool col)
 {
     cv::Mat equalized_image;
     input_image.copyTo(equalized_image);
@@ -748,11 +748,11 @@ cv::Mat Light_gradient_equalizer(cv::Mat input_image)
 
     int average_intensity = 0;
     int desired_intensity = 0;
-    int pixel_batch = colsize*rowsize/10;
+    int pixel_batch = colsize*rowsize/20;
     //uchar* data;// = input_img.ptr<uchar>(0);
     uchar* data = equalized_image.ptr<uchar>(0);
 
-    for(int i = 0; i< 10;i++)
+    for(int i = 0; i< 20;i++)//vertical
     {
 
         double counter=0;
@@ -784,9 +784,49 @@ cv::Mat Light_gradient_equalizer(cv::Mat input_image)
             }
         }
 
-    //lag samme for bortover, da er det lysere nedover og bortover.
+    }
+    if(col == true)
+    {
+        for(int i = 0; i< 40;i++)//horizontal
+        {
+            cv::Mat sub_image,sub_image2;
+            sub_image = equalized_image(cv::Rect(i*(colsize/40),0,colsize/40,rowsize));
+            sub_image.copyTo(sub_image2);
+            uchar* data = sub_image2.ptr<uchar>(0);
+            double counter = 0;
+            for(int j = 0; j<(sub_image2.cols*sub_image2.rows);j++)
+            {
+                counter = counter+data[j];
+
+            }
+            if(i==0)
+            {
+                desired_intensity = counter/(sub_image2.cols*sub_image2.rows);
+            }
+            else
+            {
+                average_intensity = counter/(sub_image2.cols*sub_image2.rows);
+
+                if(desired_intensity != average_intensity)
+                {
+                    int difference = desired_intensity-average_intensity;
+
+                    for(int j = 0; j<(sub_image2.cols*sub_image2.rows);j++)
+                    {
+                        data[j] = data[j]+difference;
+                    }
+
+                    sub_image2.copyTo(sub_image);
+
+                    qDebug() << "cahanged col that started on col " << i*colsize/20;
+                }
+            }
+
+        }
 
     }
+
+
 
 
     return equalized_image;

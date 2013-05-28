@@ -158,6 +158,7 @@ public:
     QRadioButton *Image_source_radioButton;
     QRadioButton *Video_source_radioButton;
     QCheckBox *Gradient_equalizer_checkBox;
+    QCheckBox *col_box;
     QMenuBar *menuBar;
     QMenu *menuFile;
 
@@ -758,6 +759,9 @@ public:
         Gradient_equalizer_checkBox = new QCheckBox(centralWidget);
         Gradient_equalizer_checkBox->setObjectName(QStringLiteral("Gradient_equalizer_checkBox"));
         Gradient_equalizer_checkBox->setGeometry(QRect(632, 60, 133, 17));
+        col_box = new QCheckBox(centralWidget);
+        col_box->setObjectName(QStringLiteral("col_box"));
+        col_box->setGeometry(QRect(768, 60, 45, 17));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -851,6 +855,7 @@ public:
         Image_source_radioButton->setText(QApplication::translate("MainWindow", "Image", 0));
         Video_source_radioButton->setText(QApplication::translate("MainWindow", "Video", 0));
         Gradient_equalizer_checkBox->setText(QApplication::translate("MainWindow", "Light gradient equalizer", 0));
+        col_box->setText(QApplication::translate("MainWindow", "col", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 
