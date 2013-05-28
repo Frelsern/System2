@@ -42,7 +42,7 @@ cv::Mat Global_Sobel(cv::Mat input_img,int kernel_size,int histogram_percentile,
     return output_img;
 }
 
-cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogram_percentile, int dx, int dy,bool Otsu)
+cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogram_percentile, int dx, int dy,bool Otsu,double x_weight, double y_weight)
 {
     cv::Mat output_img;
     if((input_img.channels()==1) && (!input_img.empty()) && (kernel_size > dx) && (kernel_size > dy) && (dx+dy>0))
@@ -105,7 +105,7 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
                     //cv::Sobel(input_img,seg_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
                     cv::convertScaleAbs(sub_image_dx,abs_sub_dx);
                     cv::convertScaleAbs(sub_image_dy,abs_sub_dy);
-                    cv::addWeighted(abs_sub_dx,1.0,abs_sub_dy,0.5,0,sub_output_img);
+                    cv::addWeighted(abs_sub_dx,x_weight,abs_sub_dy,y_weight,0,sub_output_img);
 
                 }
                 else
@@ -143,7 +143,7 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
                      cv::Sobel(sub_image,sub_image_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
                      cv::convertScaleAbs(sub_image_dx,abs_sub_dx);
                      cv::convertScaleAbs(sub_image_dy,abs_sub_dy);
-                     cv::addWeighted(abs_sub_dx,1.0,abs_sub_dy,0.5,0,sub_output_img);
+                     cv::addWeighted(abs_sub_dx,x_weight,abs_sub_dy,y_weight,0,sub_output_img);
 
                  }
                  else
@@ -181,7 +181,7 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
                      cv::Sobel(sub_image,sub_image_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
                      cv::convertScaleAbs(sub_image_dx,abs_sub_dx);
                      cv::convertScaleAbs(sub_image_dy,abs_sub_dy);
-                     cv::addWeighted(abs_sub_dx,1.0,abs_sub_dy,0.5,0,sub_output_img);
+                     cv::addWeighted(abs_sub_dx,x_weight,abs_sub_dy,y_weight,0,sub_output_img);
 
                  }
                  else
@@ -206,7 +206,7 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
                  cv::Sobel(sub_image,sub_image_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
                  cv::convertScaleAbs(sub_image_dx,abs_sub_dx);
                  cv::convertScaleAbs(sub_image_dy,abs_sub_dy);
-                 cv::addWeighted(abs_sub_dx,1.0,abs_sub_dy,0.5,0,sub_output_img);
+                 cv::addWeighted(abs_sub_dx,x_weight,abs_sub_dy,y_weight,0,sub_output_img);
 
              }
              else
@@ -283,7 +283,7 @@ cv::Mat Global_Scharr(cv::Mat input_img,int histogram_percentile, bool dx_checke
     return output_img;
 }
 
-cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, bool dx_checked,bool dy_checked,bool Otsu)
+cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, bool dx_checked,bool dy_checked,bool Otsu,double x_weight, double y_weight)
 {
     cv::Mat output_img;
     if((input_img.channels()==1) && (!input_img.empty()))
@@ -344,7 +344,7 @@ cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, 
                      cv::Sobel(sub_image2,seg_dy,CV_32F,0,1,CV_SCHARR,1,0,cv::BORDER_REPLICATE);
                      cv::convertScaleAbs(seg_dx,abs_seg_x);
                      cv::convertScaleAbs(seg_dy,abs_seg_y);
-                     cv::addWeighted(abs_seg_x,1.0,abs_seg_y,0.5,0,sub_image);//not perfect, can adjust dx and dy
+                     cv::addWeighted(abs_seg_x,x_weight,abs_seg_y,y_weight,0,sub_image);//not perfect, can adjust dx and dy
                  }
                  else if(dx_checked)
                  {
@@ -384,7 +384,7 @@ cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, 
                       cv::Sobel(sub_image2,seg_dy,CV_32F,0,1,CV_SCHARR,1,0,cv::BORDER_REPLICATE);
                       cv::convertScaleAbs(seg_dx,abs_seg_x);
                       cv::convertScaleAbs(seg_dy,abs_seg_y);
-                      cv::addWeighted(abs_seg_x,1.0,abs_seg_y,0.5,0,sub_image);//not perfect, can adjust dx and dy
+                      cv::addWeighted(abs_seg_x,x_weight,abs_seg_y,y_weight,0,sub_image);//not perfect, can adjust dx and dy
                   }
                   else if(dx_checked)
                   {
@@ -426,7 +426,7 @@ cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, 
                       cv::Sobel(sub_image2,seg_dy,CV_32F,0,1,CV_SCHARR,1,0,cv::BORDER_REPLICATE);
                       cv::convertScaleAbs(seg_dx,abs_seg_x);
                       cv::convertScaleAbs(seg_dy,abs_seg_y);
-                      cv::addWeighted(abs_seg_x,1.0,abs_seg_y,0.5,0,sub_image);//not perfect, can adjust dx and dy
+                      cv::addWeighted(abs_seg_x,x_weight,abs_seg_y,y_weight,0,sub_image);//not perfect, can adjust dx and dy
                   }
                   else if(dx_checked)
                   {
@@ -455,7 +455,7 @@ cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, 
                   cv::Sobel(sub_image2,seg_dy,CV_32F,0,1,CV_SCHARR,1,0,cv::BORDER_REPLICATE);
                   cv::convertScaleAbs(seg_dx,abs_seg_x);
                   cv::convertScaleAbs(seg_dy,abs_seg_y);
-                  cv::addWeighted(abs_seg_x,1.0,abs_seg_y,0.5,0,sub_image);//not perfect, can adjust dx and dy
+                  cv::addWeighted(abs_seg_x,x_weight,abs_seg_y,y_weight,0,sub_image);//not perfect, can adjust dx and dy
               }
               else if(dx_checked)
               {
