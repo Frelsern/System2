@@ -1243,15 +1243,19 @@ Edge Segmentation
      </layout>
     </widget>
    </widget>
-   <zorder>label</zorder>
-   <zorder>processed_image_label</zorder>
-   <zorder>Segmentation_groupBox</zorder>
-   <zorder>Modes_groupbox</zorder>
-   <zorder>Color_spaces_groupBox</zorder>
-   <zorder>Bottom_line_box</zorder>
-   <zorder>Capture_clean_net_pushButton</zorder>
-   <zorder>Input_Source_groupBox</zorder>
-   <zorder>Local_Otsu_box</zorder>
+   <widget class="QCheckBox" name="Gradient_equalizer_checkBox">
+    <property name="geometry">
+     <rect>
+      <x>632</x>
+      <y>60</y>
+      <width>133</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Light gradient equalizer</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

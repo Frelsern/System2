@@ -611,13 +611,23 @@ cv::Mat Local_Otsu(cv::Mat input_img, int sub_images)
 cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat image)
 {
     //qDebug() << x << y << width << height;
-    cv::Mat last_sub,new_sub;
+    cv::Mat last_sub,new_sub,last_sub_image,new_sub_image;
     if(y>0)
     {
+       /* int num_pix = Segmented_image.rows*Segmented_image.cols;
+        uchar* data = Segmented_image.ptr<uchar>(0);
+        for(int i = 0; i<num_pix;i++)
+        {
+            data[i] = 255-data[i];
+        }*/
         //topprad mot bunnrad
-        last_sub = image(cv::Rect(x,y-1,width,1));
-        new_sub = image(cv::Rect(x,y,width,height));
+        last_sub_image = image(cv::Rect(x,y-1,width,1));
+        new_sub_image = image(cv::Rect(x,y,width,height));
+        last_sub_image.copyTo(last_sub);
+        new_sub_image.copyTo(new_sub);
+
         int counter=0;
+        bool picture = true;
         uchar* new_sub_ptr = new_sub.ptr<uchar>(0);
         uchar* last_sub_ptr = last_sub.ptr<uchar>(0);
         for(int i = 0;i<width;i++)
@@ -627,20 +637,30 @@ cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat imag
             {
                 counter +=1;
             }
-            counter = width;
+            //counter = width;
         }
         if(counter>(2*width/3))
         {
             //qDebug() << counter << width << x << y;
             //qDebug() << "kom hit" << x << y << width << height;
-            imwrite(("new_sub.png"), new_sub );
-            imwrite(("last_sub.png"),last_sub);
+            //imwrite(("new_sub.png"), new_sub );
+            //imwrite(("last_sub.png"),last_sub);
+
+
             uchar* sub_image_ptr = new_sub.ptr<uchar>(0);
             for(int i = 0;i<(width*height);i++)
             {
               //  qDebug() << new_sub_ptr[i];
                 sub_image_ptr[i] = 255-sub_image_ptr[i];
+
             }
+            if(picture==true)
+            {
+                picture = false;
+                imwrite(("new_sub.png"), new_sub );
+                imwrite(("new_sub.png"), new_sub );
+            }
+            new_sub.copyTo(new_sub_image);
 
         }
 
@@ -652,9 +672,9 @@ cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat imag
     }
     else
     {
-        new_sub = new_sub = image(cv::Rect(x,y,width,height));
+        new_sub_image = image(cv::Rect(x,y,width,height));
     }
-    return new_sub;
+    return new_sub_image;
 }
 
 cv::Mat Naive_Thresholding(cv::Mat input_img, int threshold)
@@ -714,3 +734,68 @@ cv::Mat Adaptive_Thresholding(cv::Mat input_img,int kernel_size, int C,bool Gaus
     }
     return output_img;
 }
+
+
+//using sub_images of a tenth of the original rowsize
+//equalize so that each aub image gets the same average intensity
+//as the first ten rows.
+cv::Mat Light_gradient_equalizer(cv::Mat input_image)
+{
+    cv::Mat equalized_image;
+    input_image.copyTo(equalized_image);
+    int colsize = equalized_image.cols;
+    int rowsize = equalized_image.rows;
+
+    int average_intensity = 0;
+    int desired_intensity = 0;
+    int pixel_batch = colsize*rowsize/10;
+    //uchar* data;// = input_img.ptr<uchar>(0);
+    uchar* data = equalized_image.ptr<uchar>(0);
+
+    for(int i = 0; i< 10;i++)
+    {
+
+        double counter=0;
+
+        for(int j = 0; j<(pixel_batch); j++)
+        {
+            counter = counter+data[j+i*pixel_batch];
+        }
+        //qDebug() << "i er" << i << pixel_batch;
+        if(i==0)
+        {
+            desired_intensity = counter/pixel_batch;
+            //qDebug() << "desired is" << desired_intensity;
+        }
+        else
+        {
+            average_intensity = counter/pixel_batch;
+           // qDebug() << "avg is " << average_intensity;
+            if(desired_intensity != average_intensity)
+            {
+                int difference = desired_intensity-average_intensity;
+
+                for(int j = 0; j<(pixel_batch); j++)
+                {
+                    data[j+i*pixel_batch] = data[j+i*pixel_batch]+difference;
+                }
+
+                //qDebug() << "cahanged row that started on row " << (i*pixel_batch)/colsize;
+            }
+        }
+
+    //lag samme for bortover, da er det lysere nedover og bortover.
+
+    }
+
+
+    return equalized_image;
+}
+
+
+
+
+
+
+
+

@@ -111,6 +111,12 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
         {
             cv::GaussianBlur(processed_image,processed_image,cv::Size(Gaussian_kernel_size,Gaussian_kernel_size),0,0,cv::BORDER_DEFAULT);
         }
+        //Light gradient
+        if(ui->Gradient_equalizer_checkBox->isChecked())
+        {
+            processed_image = Light_gradient_equalizer(processed_image);
+        }
+
 
         //thresholding
         switch(thresh_met)
@@ -127,6 +133,10 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
                                            ui->Otsu_in_edge_checkBox->isChecked());
             break;
         case OTSU:
+            if(ui->Gradient_equalizer_checkBox->isChecked())
+            {
+
+            }
             Segmented_image = Local_Otsu(processed_image,Local_Otsu_numberofSubImages);
             break;
         case THRESHOLDING:

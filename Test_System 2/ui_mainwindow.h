@@ -157,6 +157,7 @@ public:
     QRadioButton *Webcam_source_radioButton;
     QRadioButton *Image_source_radioButton;
     QRadioButton *Video_source_radioButton;
+    QCheckBox *Gradient_equalizer_checkBox;
     QMenuBar *menuBar;
     QMenu *menuFile;
 
@@ -754,16 +755,10 @@ public:
 
         horizontalLayout_13->addWidget(Video_source_radioButton);
 
+        Gradient_equalizer_checkBox = new QCheckBox(centralWidget);
+        Gradient_equalizer_checkBox->setObjectName(QStringLiteral("Gradient_equalizer_checkBox"));
+        Gradient_equalizer_checkBox->setGeometry(QRect(632, 60, 133, 17));
         MainWindow->setCentralWidget(centralWidget);
-        label->raise();
-        processed_image_label->raise();
-        Segmentation_groupBox->raise();
-        Modes_groupbox->raise();
-        Color_spaces_groupBox->raise();
-        Bottom_line_box->raise();
-        Capture_clean_net_pushButton->raise();
-        Input_Source_groupBox->raise();
-        Local_Otsu_box->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1400, 21));
@@ -855,6 +850,7 @@ public:
         Webcam_source_radioButton->setText(QApplication::translate("MainWindow", "WebCam", 0));
         Image_source_radioButton->setText(QApplication::translate("MainWindow", "Image", 0));
         Video_source_radioButton->setText(QApplication::translate("MainWindow", "Video", 0));
+        Gradient_equalizer_checkBox->setText(QApplication::translate("MainWindow", "Light gradient equalizer", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 
