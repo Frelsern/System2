@@ -289,7 +289,7 @@
      <rect>
       <x>5</x>
       <y>200</y>
-      <width>1330</width>
+      <width>1349</width>
       <height>121</height>
      </rect>
     </property>
@@ -307,7 +307,7 @@
     </property>
     <property name="maximumSize">
      <size>
-      <width>1330</width>
+      <width>1500</width>
       <height>121</height>
      </size>
     </property>
@@ -367,9 +367,9 @@
     <widget class="QGroupBox" name="Segmentation_enhancing_groupBox">
      <property name="geometry">
       <rect>
-       <x>860</x>
+       <x>1000</x>
        <y>20</y>
-       <width>465</width>
+       <width>341</width>
        <height>97</height>
       </rect>
      </property>
@@ -489,265 +489,6 @@
          <widget class="QLCDNumber" name="Gaussian_lcdNumber">
           <property name="intValue" stdset="0">
            <number>1</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </widget>
-    <widget class="QGroupBox" name="Local_Sobel_box">
-     <property name="geometry">
-      <rect>
-       <x>300</x>
-       <y>20</y>
-       <width>550</width>
-       <height>100</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Local Sobel</string>
-     </property>
-     <widget class="QGroupBox" name="Local_Sobel_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>30</y>
-        <width>170</width>
-        <height>45</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Number of sub-images</string>
-      </property>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>4</x>
-         <y>12</y>
-         <width>156</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QSlider" name="Local_Sobel_horizontalSlider">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>40</number>
-          </property>
-          <property name="value">
-           <number>5</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="Local_Sobel_lcdNumber">
-          <property name="intValue" stdset="0">
-           <number>25</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="Local_Sobel_Histogram">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>20</y>
-        <width>170</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Histogram percentile</string>
-      </property>
-      <widget class="QWidget" name="layoutWidget_4">
-       <property name="geometry">
-        <rect>
-         <x>4</x>
-         <y>12</y>
-         <width>156</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <widget class="QSlider" name="Local_Sobel_histogram_slider">
-          <property name="minimum">
-           <number>60</number>
-          </property>
-          <property name="maximum">
-           <number>99</number>
-          </property>
-          <property name="sliderPosition">
-           <number>90</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="Local_Sobel_histogram_lcdNumber">
-          <property name="intValue" stdset="0">
-           <number>90</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="Local_Sobel_dx_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>172</x>
-        <y>16</y>
-        <width>169</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>dx</string>
-      </property>
-      <widget class="QWidget" name="layoutWidget_15">
-       <property name="geometry">
-        <rect>
-         <x>4</x>
-         <y>12</y>
-         <width>156</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_22">
-        <item>
-         <widget class="QSlider" name="Local_Sobel_dx_slider">
-          <property name="minimum">
-           <number>0</number>
-          </property>
-          <property name="maximum">
-           <number>6</number>
-          </property>
-          <property name="value">
-           <number>1</number>
-          </property>
-          <property name="sliderPosition">
-           <number>1</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="Local_Sobel_dx_lcdNumber">
-          <property name="intValue" stdset="0">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="Local_Sobel_dy_groupBox">
-      <property name="geometry">
-       <rect>
-        <x>172</x>
-        <y>56</y>
-        <width>169</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>dy</string>
-      </property>
-      <widget class="QWidget" name="layoutWidget_17">
-       <property name="geometry">
-        <rect>
-         <x>4</x>
-         <y>12</y>
-         <width>156</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_24">
-        <item>
-         <widget class="QSlider" name="Local_Sobel_dy_slider">
-          <property name="minimum">
-           <number>0</number>
-          </property>
-          <property name="maximum">
-           <number>6</number>
-          </property>
-          <property name="value">
-           <number>1</number>
-          </property>
-          <property name="sliderPosition">
-           <number>1</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="Local_Sobel_dy_lcdNumber">
-          <property name="intValue" stdset="0">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="Local_Sobel_Kernel_size_box">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>60</y>
-        <width>170</width>
-        <height>37</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Kernel Size</string>
-      </property>
-      <widget class="QWidget" name="layoutWidget_16">
-       <property name="geometry">
-        <rect>
-         <x>4</x>
-         <y>12</y>
-         <width>156</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_23">
-        <item>
-         <widget class="QSlider" name="Local_Sobel_kernel_slider">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>7</number>
-          </property>
-          <property name="sliderPosition">
-           <number>3</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLCDNumber" name="Local_Sobel_kernel_lcdNumber">
-          <property name="intValue" stdset="0">
-           <number>3</number>
           </property>
          </widget>
         </item>
@@ -1282,6 +1023,367 @@ Edge Segmentation
       </widget>
      </widget>
     </widget>
+    <widget class="QGroupBox" name="Local_Sobel_box">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>20</y>
+       <width>693</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Local Sobel</string>
+     </property>
+     <widget class="QGroupBox" name="Local_Sobel_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>170</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Number of sub-images</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>12</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QSlider" name="Local_Sobel_horizontalSlider">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>40</number>
+          </property>
+          <property name="value">
+           <number>5</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Local_Sobel_lcdNumber">
+          <property name="intValue" stdset="0">
+           <number>25</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="Local_Sobel_Histogram">
+      <property name="geometry">
+       <rect>
+        <x>344</x>
+        <y>16</y>
+        <width>170</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Histogram percentile</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_4">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>12</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QSlider" name="Local_Sobel_histogram_slider">
+          <property name="minimum">
+           <number>60</number>
+          </property>
+          <property name="maximum">
+           <number>99</number>
+          </property>
+          <property name="sliderPosition">
+           <number>90</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Local_Sobel_histogram_lcdNumber">
+          <property name="intValue" stdset="0">
+           <number>90</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="Local_Sobel_dx_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>172</x>
+        <y>16</y>
+        <width>169</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>dx</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_15">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>12</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_22">
+        <item>
+         <widget class="QSlider" name="Local_Sobel_dx_slider">
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>6</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+          <property name="sliderPosition">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Local_Sobel_dx_lcdNumber">
+          <property name="intValue" stdset="0">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="Local_Sobel_dy_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>172</x>
+        <y>56</y>
+        <width>169</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>dy</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_17">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>12</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_24">
+        <item>
+         <widget class="QSlider" name="Local_Sobel_dy_slider">
+          <property name="minimum">
+           <number>0</number>
+          </property>
+          <property name="maximum">
+           <number>6</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+          <property name="sliderPosition">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Local_Sobel_dy_lcdNumber">
+          <property name="intValue" stdset="0">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="Local_Sobel_Kernel_size_box">
+      <property name="geometry">
+       <rect>
+        <x>344</x>
+        <y>56</y>
+        <width>170</width>
+        <height>37</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Kernel Size</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_16">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>12</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_23">
+        <item>
+         <widget class="QSlider" name="Local_Sobel_kernel_slider">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>7</number>
+          </property>
+          <property name="sliderPosition">
+           <number>3</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Local_Sobel_kernel_lcdNumber">
+          <property name="intValue" stdset="0">
+           <number>3</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="Sobel_weight_dy_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>516</x>
+        <y>56</y>
+        <width>170</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Weighting of dy</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_9">
+       <property name="geometry">
+        <rect>
+         <x>8</x>
+         <y>16</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_16">
+        <item>
+         <widget class="QSlider" name="Sobel_weight_dy_horizontalSlider">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Sobel_weight_dy_lcdNumber">
+          <property name="intValue" stdset="0">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="Sobel_weight_dx_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>516</x>
+        <y>12</y>
+        <width>170</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Weighting of dx</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_10">
+       <property name="geometry">
+        <rect>
+         <x>8</x>
+         <y>16</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_17">
+        <item>
+         <widget class="QSlider" name="Sobel_weight_dx_horizontalSlider">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>50</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Sobel_weight_dx_lcdNumber">
+          <property name="smallDecimalPoint">
+           <bool>false</bool>
+          </property>
+          <property name="value" stdset="0">
+           <double>50.000000000000000</double>
+          </property>
+          <property name="intValue" stdset="0">
+           <number>50</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
    </widget>
    <widget class="QPushButton" name="Capture_clean_net_pushButton">
     <property name="geometry">
@@ -1398,12 +1500,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>301</x>
-     <y>206</y>
+     <x>310</x>
+     <y>312</y>
     </hint>
     <hint type="destinationlabel">
-     <x>454</x>
-     <y>208</y>
+     <x>463</x>
+     <y>310</y>
     </hint>
    </hints>
   </connection>
@@ -1414,12 +1516,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>670</x>
-     <y>294</y>
+     <x>630</x>
+     <y>166</y>
     </hint>
     <hint type="destinationlabel">
-     <x>823</x>
-     <y>296</y>
+     <x>782</x>
+     <y>168</y>
     </hint>
    </hints>
   </connection>
@@ -1430,11 +1532,11 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>874</x>
+     <x>1015</x>
      <y>314</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1012</x>
+     <x>1152</x>
      <y>316</y>
     </hint>
    </hints>
@@ -1462,12 +1564,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>558</x>
-     <y>290</y>
+     <x>534</x>
+     <y>166</y>
     </hint>
     <hint type="destinationlabel">
-     <x>635</x>
-     <y>292</y>
+     <x>610</x>
+     <y>168</y>
     </hint>
    </hints>
   </connection>
@@ -1478,12 +1580,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>557</x>
-     <y>330</y>
+     <x>533</x>
+     <y>206</y>
     </hint>
     <hint type="destinationlabel">
-     <x>635</x>
-     <y>332</y>
+     <x>610</x>
+     <y>208</y>
     </hint>
    </hints>
   </connection>
@@ -1510,12 +1612,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>675</x>
-     <y>152</y>
+     <x>676</x>
+     <y>268</y>
     </hint>
     <hint type="destinationlabel">
-     <x>687</x>
-     <y>152</y>
+     <x>759</x>
+     <y>266</y>
     </hint>
    </hints>
   </connection>
@@ -1526,12 +1628,44 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>673</x>
-     <y>191</y>
+     <x>674</x>
+     <y>312</y>
     </hint>
     <hint type="destinationlabel">
-     <x>695</x>
+     <x>759</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Sobel_weight_dx_horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Sobel_weight_dx_lcdNumber</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>879</x>
+     <y>156</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>900</x>
+     <y>156</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Sobel_weight_dy_horizontalSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Sobel_weight_dy_lcdNumber</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>879</x>
      <y>196</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>901</x>
+     <y>199</y>
     </hint>
    </hints>
   </connection>

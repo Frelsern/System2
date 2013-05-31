@@ -111,7 +111,7 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
         {
             cv::GaussianBlur(processed_image,processed_image,cv::Size(Gaussian_kernel_size,Gaussian_kernel_size),0,0,cv::BORDER_DEFAULT);
         }
-        //Light gradient
+        //Light gradient equalization
         if(ui->Gradient_equalizer_checkBox->isChecked())
         {
             processed_image = Light_gradient_equalizer(processed_image);
@@ -125,15 +125,15 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
             break;
         case SOBEL:
             Segmented_image = Local_Sobel(processed_image,Local_Sobel_numberofSubImages, Local_Sobel_kernel_size,
-                                          Local_Sobel_hist_percentile,Local_Sobel_dx,Local_Sobel_dy,ui->Otsu_in_edge_checkBox->isChecked(),0.5,0.5);
+                                          Local_Sobel_hist_percentile,Local_Sobel_dx,Local_Sobel_dy,ui->Otsu_in_edge_checkBox->isChecked(),
+                                          (double)ui->Sobel_weight_dx_horizontalSlider->value()/100
+                                          ,(double)ui->Sobel_weight_dy_horizontalSlider->value()/100);
             break;
         case SCHARR:
-            //double weight_dx = 1.0*(ui->Scharr_weight_dx_horizontalSlider/100);
-            //double weight_dy = 1.0*(ui->Scharr_weight_dy_horizontalSlider/100);
             Segmented_image = Local_Scharr(processed_image,Local_Scharr_numberofSubImages,Local_Scharr_hist_percentile,
                                            ui->Local_Scharr_dx_checkBox->isChecked(),ui->Local_Scharr_dy_checkBox->isChecked(),
                                            ui->Otsu_in_edge_checkBox->isChecked(),(double)ui->Scharr_weight_dx_horizontalSlider->value()/100
-                                                                                 ,(double)ui->Scharr_weight_dy_horizontalSlider->value()/100);
+                                           ,(double)ui->Scharr_weight_dy_horizontalSlider->value()/100);
             break;
         case OTSU:
             if(ui->Gradient_equalizer_checkBox->isChecked())
@@ -650,8 +650,9 @@ void MainWindow::on_actionDont_Process_triggered()
     cspace = COLOR_NONE;
     thresh_met = THRESH_NONE;
     mode = NO_MODE;
+
     hide_all_seg_boxes();
     processed_image.release();
-    ui->processed_image_label->hide();
+   // ui->processed_image_label->hide();
 }
 
