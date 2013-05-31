@@ -12,6 +12,7 @@
 #include "growth_detection.h"
 #include "colorspaces.h"
 #include "tweaking.h"
+#include "image_enhancement.h"
 
 #include<opencv2/core/core.hpp>
 #include<opencv2/highgui/highgui.hpp>

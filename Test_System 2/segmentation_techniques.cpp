@@ -11,8 +11,6 @@ cv::Mat Global_Sobel(cv::Mat input_img,int kernel_size,int histogram_percentile,
     cv::Mat output_img;
     if((input_img.channels()==1) && (!input_img.empty()) && (kernel_size > dx) && (kernel_size > dy) && (dx+dy>0))
     {
-
-
         cv::Mat edge_img;
         if((dx>0)&& (dy>0))
         {
@@ -47,7 +45,6 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
     cv::Mat output_img;
     if((input_img.channels()==1) && (!input_img.empty()) && (kernel_size > dx) && (kernel_size > dy) && (dx+dy>0))
     {
-        //input_img.convertTo(input_img,CV_32F);
         int colsize = input_img.cols;
         int rowsize = input_img.rows;
 
@@ -56,7 +53,6 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
         sub_image2.create(rowsize/sub_images,colsize/sub_images,CV_32F);
         sub_image_dx.create(rowsize/sub_images,colsize/sub_images,CV_32F);
         sub_image_dy.create(rowsize/sub_images,colsize/sub_images,CV_32F);
-        //edge_img = input_img.clone();
         edge_img.create(rowsize,colsize,CV_8U);
         input_img.convertTo(input_img,CV_32F);
 
@@ -88,21 +84,10 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
                 sub_image = input_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
                 sub_output_img = edge_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
 
-
-                //cv::Sobel(sub_image2,sub_image,CV_32F,dx,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
-
-  //---------------------------------//
-
-
                 if((dx>0)&&(dy>0))
                 {
-                   // cv::Mat seg_dx,seg_dy;
-
                     cv::Sobel(sub_image,sub_image_dx,CV_32F,dx,0,kernel_size,1,0,cv::BORDER_REPLICATE);
                     cv::Sobel(sub_image,sub_image_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
-
-                    //cv::Sobel(input_img,seg_dx,CV_32F,dx,0,kernel_size,1,0,cv::BORDER_REPLICATE);
-                    //cv::Sobel(input_img,seg_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
                     cv::convertScaleAbs(sub_image_dx,abs_sub_dx);
                     cv::convertScaleAbs(sub_image_dy,abs_sub_dy);
                     cv::addWeighted(abs_sub_dx,x_weight,abs_sub_dy,y_weight,0,sub_output_img);
@@ -138,13 +123,11 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
 
                  if((dx>0)&&(dy>0))
                  {
-
                      cv::Sobel(sub_image,sub_image_dx,CV_32F,dx,0,kernel_size,1,0,cv::BORDER_REPLICATE);
                      cv::Sobel(sub_image,sub_image_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
                      cv::convertScaleAbs(sub_image_dx,abs_sub_dx);
                      cv::convertScaleAbs(sub_image_dy,abs_sub_dy);
                      cv::addWeighted(abs_sub_dx,x_weight,abs_sub_dy,y_weight,0,sub_output_img);
-
                  }
                  else
                  {
@@ -176,13 +159,11 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
 
                  if((dx>0)&&(dy>0))
                  {
-
                      cv::Sobel(sub_image,sub_image_dx,CV_32F,dx,0,kernel_size,1,0,cv::BORDER_REPLICATE);
                      cv::Sobel(sub_image,sub_image_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
                      cv::convertScaleAbs(sub_image_dx,abs_sub_dx);
                      cv::convertScaleAbs(sub_image_dy,abs_sub_dy);
                      cv::addWeighted(abs_sub_dx,x_weight,abs_sub_dy,y_weight,0,sub_output_img);
-
                  }
                  else
                  {
@@ -201,23 +182,17 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
 
              if((dx>0)&&(dy>0))
              {
-
                  cv::Sobel(sub_image,sub_image_dx,CV_32F,dx,0,kernel_size,1,0,cv::BORDER_REPLICATE);
                  cv::Sobel(sub_image,sub_image_dy,CV_32F,0,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
                  cv::convertScaleAbs(sub_image_dx,abs_sub_dx);
                  cv::convertScaleAbs(sub_image_dy,abs_sub_dy);
                  cv::addWeighted(abs_sub_dx,x_weight,abs_sub_dy,y_weight,0,sub_output_img);
-
              }
              else
              {
                  cv::Sobel(sub_image2,sub_output_img,CV_32F,dx,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
              }
          }
-
-
-
-
         if(!((dx>0)&&(dy>0)))
         {
             edge_img.convertTo(edge_img,CV_8U);
@@ -233,9 +208,6 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
             output_img = Histogram_seg(histogram_percentile,edge_img);
         }
     }
-
-
-
 
     return output_img;
 }
@@ -278,7 +250,6 @@ cv::Mat Global_Scharr(cv::Mat input_img,int histogram_percentile, bool dx_checke
             output_img = Histogram_seg(histogram_percentile,edge_img);
         }
     }
-
 
     return output_img;
 }
@@ -483,9 +454,7 @@ cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, 
          }
     }
 
-
     return output_img;
-
 }
 
 cv::Mat Global_Otsu(cv::Mat input_img)
@@ -538,14 +507,11 @@ cv::Mat Local_Otsu(cv::Mat input_img, int sub_images)
                     e = f+1;
                     f = f+floor(1.0*colsize/sub_images);
                 }
-
                 sub_image = output_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
                 sub_image.copyTo(sub_image2);
                 cv::threshold(sub_image2,sub_image,0,255,cv::THRESH_BINARY | cv::THRESH_OTSU);
                 sub_image3 =  Local_Otsu_neighbourhood(e, c,floor(1.0*colsize/sub_images),  floor(1.0*rowsize/sub_images),output_img);
                 sub_image3.copyTo(sub_image);
-
-
             }
         }
        if(((rowsize-1)-d)>0)//adds missing rows
@@ -567,9 +533,7 @@ cv::Mat Local_Otsu(cv::Mat input_img, int sub_images)
                 sub_image = output_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
                 sub_image.copyTo(sub_image2);
                 cv::threshold(sub_image2,sub_image,0,255,cv::THRESH_BINARY | cv::THRESH_OTSU);
-
             }
-
         }
         if(((colsize-1)-d)>0)//adds missing coloumns
         {
@@ -592,7 +556,6 @@ cv::Mat Local_Otsu(cv::Mat input_img, int sub_images)
                 sub_image.copyTo(sub_image2);
                 cv::threshold(sub_image2,sub_image,0,255,cv::THRESH_BINARY | cv::THRESH_OTSU);
             }
-
         }
         if((((colsize-1)-d)>0) && (((rowsize-1)-d)>0))
         {
@@ -610,16 +573,9 @@ cv::Mat Local_Otsu(cv::Mat input_img, int sub_images)
 
 cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat image)
 {
-    //qDebug() << x << y << width << height;
     cv::Mat last_sub,new_sub,last_sub_image,new_sub_image;
     if(y>0)
     {
-       /* int num_pix = Segmented_image.rows*Segmented_image.cols;
-        uchar* data = Segmented_image.ptr<uchar>(0);
-        for(int i = 0; i<num_pix;i++)
-        {
-            data[i] = 255-data[i];
-        }*/
         //topprad mot bunnrad
         last_sub_image = image(cv::Rect(x,y-1,width,1));
         new_sub_image = image(cv::Rect(x,y,width,height));
@@ -632,8 +588,7 @@ cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat imag
         uchar* last_sub_ptr = last_sub.ptr<uchar>(0);
         for(int i = 0;i<width;i++)
         {
-           // if(new_sub_ptr[i] != last_sub_ptr[i+width*(height-1)])//må faile her, se på bildene som er tatt, ikke <uchar>?
-            if(new_sub_ptr[i] != last_sub_ptr[i])//må faile her, se på bildene som er tatt
+            if(new_sub_ptr[i] != last_sub_ptr[i])
             {
                 counter +=1;
             }
@@ -641,20 +596,13 @@ cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat imag
         }
         if(counter>(2*width/3))
         {
-            //qDebug() << counter << width << x << y;
-            //qDebug() << "kom hit" << x << y << width << height;
-            //imwrite(("new_sub.png"), new_sub );
-            //imwrite(("last_sub.png"),last_sub);
-
-
             uchar* sub_image_ptr = new_sub.ptr<uchar>(0);
             for(int i = 0;i<(width*height);i++)
             {
-              //  qDebug() << new_sub_ptr[i];
                 sub_image_ptr[i] = 255-sub_image_ptr[i];
 
             }
-            if(picture==true)
+            if(picture==true)//remove
             {
                 picture = false;
                 imwrite(("new_sub.png"), new_sub );
@@ -734,108 +682,3 @@ cv::Mat Adaptive_Thresholding(cv::Mat input_img,int kernel_size, int C,bool Gaus
     }
     return output_img;
 }
-
-
-//using sub_images of a tenth of the original rowsize
-//equalize so that each aub image gets the same average intensity
-//as the first ten rows.
-cv::Mat Light_gradient_equalizer(cv::Mat input_image,bool col)
-{
-    cv::Mat equalized_image;
-    input_image.copyTo(equalized_image);
-    int colsize = equalized_image.cols;
-    int rowsize = equalized_image.rows;
-
-    int average_intensity = 0;
-    int desired_intensity = 0;
-    int pixel_batch = colsize*rowsize/20;
-    //uchar* data;// = input_img.ptr<uchar>(0);
-    uchar* data = equalized_image.ptr<uchar>(0);
-
-    for(int i = 0; i< 20;i++)//vertical
-    {
-
-        double counter=0;
-
-        for(int j = 0; j<(pixel_batch); j++)
-        {
-            counter = counter+data[j+i*pixel_batch];
-        }
-        //qDebug() << "i er" << i << pixel_batch;
-        if(i==0)
-        {
-            desired_intensity = counter/pixel_batch;
-            //qDebug() << "desired is" << desired_intensity;
-        }
-        else
-        {
-            average_intensity = counter/pixel_batch;
-           // qDebug() << "avg is " << average_intensity;
-            if(desired_intensity != average_intensity)
-            {
-                int difference = desired_intensity-average_intensity;
-
-                for(int j = 0; j<(pixel_batch); j++)
-                {
-                    data[j+i*pixel_batch] = data[j+i*pixel_batch]+difference;
-                }
-
-                //qDebug() << "cahanged row that started on row " << (i*pixel_batch)/colsize;
-            }
-        }
-
-    }
-    if(col == true)
-    {
-        for(int i = 0; i< 40;i++)//horizontal
-        {
-            cv::Mat sub_image,sub_image2;
-            sub_image = equalized_image(cv::Rect(i*(colsize/40),0,colsize/40,rowsize));
-            sub_image.copyTo(sub_image2);
-            uchar* data = sub_image2.ptr<uchar>(0);
-            double counter = 0;
-            for(int j = 0; j<(sub_image2.cols*sub_image2.rows);j++)
-            {
-                counter = counter+data[j];
-
-            }
-            if(i==0)
-            {
-                desired_intensity = counter/(sub_image2.cols*sub_image2.rows);
-            }
-            else
-            {
-                average_intensity = counter/(sub_image2.cols*sub_image2.rows);
-
-                if(desired_intensity != average_intensity)
-                {
-                    int difference = desired_intensity-average_intensity;
-
-                    for(int j = 0; j<(sub_image2.cols*sub_image2.rows);j++)
-                    {
-                        data[j] = data[j]+difference;
-                    }
-
-                    sub_image2.copyTo(sub_image);
-
-                    qDebug() << "cahanged col that started on col " << i*colsize/20;
-                }
-            }
-
-        }
-
-    }
-
-
-
-
-    return equalized_image;
-}
-
-
-
-
-
-
-
-

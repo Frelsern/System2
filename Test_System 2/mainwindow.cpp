@@ -114,7 +114,7 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
         //Light gradient
         if(ui->Gradient_equalizer_checkBox->isChecked())
         {
-            processed_image = Light_gradient_equalizer(processed_image,ui->col_box->isChecked());
+            processed_image = Light_gradient_equalizer(processed_image);
         }
 
 

@@ -29,7 +29,5 @@ cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat imag
 cv::Mat Naive_Thresholding(cv::Mat input_img,int threshold);
 cv::Mat Adaptive_Thresholding(cv::Mat input_img,int kernel_size,int C,bool Gaussian);
 
-cv::Mat Light_gradient_equalizer(cv::Mat input_img, bool col);
-
 
 #endif // SEGMENTATION_TECHNIQUES_H

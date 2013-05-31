@@ -64,7 +64,7 @@
     <property name="title">
      <string>Segmentation methods</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>4</x>
@@ -1356,19 +1356,6 @@ Edge Segmentation
     </property>
     <property name="text">
      <string>Light gradient equalizer</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="col_box">
-    <property name="geometry">
-     <rect>
-      <x>768</x>
-      <y>60</y>
-      <width>45</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>col</string>
     </property>
    </widget>
   </widget>
