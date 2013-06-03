@@ -178,6 +178,8 @@ public:
     QRadioButton *Image_source_radioButton;
     QRadioButton *Video_source_radioButton;
     QCheckBox *Gradient_equalizer_checkBox;
+    QCheckBox *Morphological_gradient_equalizer_checkBox;
+    QCheckBox *Morphological_sharpen_checkBox;
     QMenuBar *menuBar;
     QMenu *menuFile;
 
@@ -886,6 +888,12 @@ public:
         Gradient_equalizer_checkBox = new QCheckBox(centralWidget);
         Gradient_equalizer_checkBox->setObjectName(QStringLiteral("Gradient_equalizer_checkBox"));
         Gradient_equalizer_checkBox->setGeometry(QRect(632, 60, 133, 17));
+        Morphological_gradient_equalizer_checkBox = new QCheckBox(centralWidget);
+        Morphological_gradient_equalizer_checkBox->setObjectName(QStringLiteral("Morphological_gradient_equalizer_checkBox"));
+        Morphological_gradient_equalizer_checkBox->setGeometry(QRect(772, 60, 201, 17));
+        Morphological_sharpen_checkBox = new QCheckBox(centralWidget);
+        Morphological_sharpen_checkBox->setObjectName(QStringLiteral("Morphological_sharpen_checkBox"));
+        Morphological_sharpen_checkBox->setGeometry(QRect(976, 60, 137, 17));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -987,6 +995,8 @@ public:
         Image_source_radioButton->setText(QApplication::translate("MainWindow", "Image", 0));
         Video_source_radioButton->setText(QApplication::translate("MainWindow", "Video", 0));
         Gradient_equalizer_checkBox->setText(QApplication::translate("MainWindow", "Light gradient equalizer", 0));
+        Morphological_gradient_equalizer_checkBox->setText(QApplication::translate("MainWindow", "Morphological light gradient equalizer", 0));
+        Morphological_sharpen_checkBox->setText(QApplication::translate("MainWindow", "Morphological sharpen", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 

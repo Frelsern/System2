@@ -8,4 +8,8 @@
 
 cv::Mat Light_gradient_equalizer(cv::Mat input_img);
 
+cv::Mat Morpological_light_gradient_equalizer(cv::Mat input_image);
+
+cv::Mat Morpological_contrast_enhancement(cv::Mat input_image);
+
 #endif // IMAGE_ENHANCEMENT_H

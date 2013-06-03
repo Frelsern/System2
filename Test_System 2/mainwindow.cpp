@@ -117,6 +117,18 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
             processed_image = Light_gradient_equalizer(processed_image);
         }
 
+        if(ui->Morphological_gradient_equalizer_checkBox->isChecked() && !processed_image.empty())
+        {
+            processed_image = Morpological_light_gradient_equalizer(processed_image);
+
+        }
+
+        if(ui->Morphological_sharpen_checkBox->isChecked() && !processed_image.empty())
+        {
+            processed_image = Morpological_contrast_enhancement(processed_image);
+        }
+
+
 
         //thresholding
         switch(thresh_met)

@@ -1460,6 +1460,32 @@ Edge Segmentation
      <string>Light gradient equalizer</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="Morphological_gradient_equalizer_checkBox">
+    <property name="geometry">
+     <rect>
+      <x>772</x>
+      <y>60</y>
+      <width>201</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Morphological light gradient equalizer</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="Morphological_sharpen_checkBox">
+    <property name="geometry">
+     <rect>
+      <x>976</x>
+      <y>60</y>
+      <width>137</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Morphological sharpen</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
