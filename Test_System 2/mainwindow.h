@@ -24,7 +24,7 @@ class MainWindow;
 
 enum Color_Space { COLOR_NONE=0,X,Y,LUMINANCE,RED,GREEN,BLUE,
                     X2,Y2,LUMINANCE2,LAB,L,A,B};
-enum Thresholding_Method {THRESH_NONE=0,SOBEL,SCHARR,OTSU,THRESHOLDING,ADAPTIVE_THRESHOLDING};
+enum Thresholding_Method {NO_THRESH_MODE=0,SOBEL,SCHARR,OTSU,THRESHOLDING,ADAPTIVE_THRESHOLDING};
 enum Mode { NO_MODE=0,HOLE_DETECTION,GROWTH_DETECTION };
 
 
@@ -130,6 +130,10 @@ private slots:
     void on_actionPause_triggered();
 
     void on_actionDont_Process_triggered();
+
+    void on_No_Segmentation_Mode_clicked();
+
+    void on_No_Color_Mode_clicked();
 
 private:
     Ui::MainWindow *ui;

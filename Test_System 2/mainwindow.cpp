@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Percentage_foreground_clean_net = -1;
 
     cspace = COLOR_NONE;
-    thresh_met = THRESH_NONE;
+    thresh_met = NO_THRESH_MODE;
     mode = NO_MODE;
     PAUSE = false;
 }
@@ -63,7 +63,7 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
         switch(cspace)
         {
         case COLOR_NONE:
-
+            input_image.copyTo(processed_image);
            break;
         case LUMINANCE:
             processed_image = custom_Y(input_image);
@@ -133,7 +133,9 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
         //thresholding
         switch(thresh_met)
         {
-        case THRESH_NONE:
+        case NO_THRESH_MODE:
+            //processed_image.copyTo(Segmented_image);
+
             break;
         case SOBEL:
             Segmented_image = Local_Sobel(processed_image,Local_Sobel_numberofSubImages, Local_Sobel_kernel_size,
@@ -194,21 +196,26 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
                                     lab_image.cols,lab_image.rows,QImage::Format_RGB888);
                 ui->label->setPixmap(QPixmap::fromImage(color_space_image));
                 ui->label->resize(ui->label->pixmap()->size());
+                ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
             }
             else if(!processed_image.empty())
             {
-                QImage color_space_image = QImage((const unsigned char*)(processed_image.data),
-                                     processed_image.cols,processed_image.rows,QImage::Format_Indexed8);
-                ui->label->setPixmap(QPixmap::fromImage(color_space_image));
-                ui->label->resize(ui->label->pixmap()->size());
-                ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
-            }else if(!input_image.empty())
-            {
-                QImage color_space_image = QImage((const unsigned char*)(input_image.data),
-                                     input_image.cols,input_image.rows,QImage::Format_RGB888);
-                ui->label->setPixmap(QPixmap::fromImage(color_space_image));
-                ui->label->resize(ui->label->pixmap()->size());
-                ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+                if(processed_image.channels()==1)//display processed image
+                {
+                    QImage color_space_image = QImage((const unsigned char*)(processed_image.data),
+                                         processed_image.cols,processed_image.rows,QImage::Format_Indexed8);
+                    ui->label->setPixmap(QPixmap::fromImage(color_space_image));
+                    ui->label->resize(ui->label->pixmap()->size());
+                    ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+                }
+                else if(processed_image.channels()==3)//displaying input image
+                {
+                    QImage color_space_image = QImage((const unsigned char*)(processed_image.data),
+                                        processed_image.cols,processed_image.rows,QImage::Format_RGB888);
+                    ui->label->setPixmap(QPixmap::fromImage(color_space_image));
+                    ui->label->resize(ui->label->pixmap()->size());
+                    ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+                }
             }
             break;
         case HOLE_DETECTION:
@@ -239,21 +246,23 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
         }
 
         //Show the segmented image in the right label
-        if(!Segmented_image.empty())
+        if((!Segmented_image.empty())&& (Segmented_image.channels()!=3) )
         {
             QImage segmented_image = QImage((const unsigned char*)(Segmented_image.data),
                                             Segmented_image.cols,Segmented_image.rows,QImage::Format_Indexed8 );
             ui->processed_image_label->setGeometry(100+ui->label->width(),100,0,0);
             ui->processed_image_label->setPixmap(QPixmap::fromImage(segmented_image));
             ui->processed_image_label->resize(ui->label->pixmap()->size());
-
         }
-
-
 }
 
 
 
+void MainWindow::on_No_Segmentation_Mode_clicked()
+{
+    thresh_met = NO_THRESH_MODE;
+    hide_all_seg_boxes();
+}
 
 void MainWindow::on_Sobel_clicked()
 {
@@ -262,7 +271,6 @@ void MainWindow::on_Sobel_clicked()
     hide_all_seg_boxes();
     ui->Local_Sobel_box->show();
 }
-
 
 void MainWindow::on_Scharr_clicked()
 {
@@ -356,6 +364,11 @@ void MainWindow::on_Hole_Detection_clicked()
 void MainWindow::on_Growth_detection_clicked()
 {
     mode = GROWTH_DETECTION;
+}
+
+void MainWindow::on_No_Color_Mode_clicked()
+{
+    cspace = COLOR_NONE;
 }
 
 void MainWindow::on_y_clicked()
@@ -660,11 +673,13 @@ void MainWindow::on_actionPause_triggered()
 void MainWindow::on_actionDont_Process_triggered()
 {
     cspace = COLOR_NONE;
-    thresh_met = THRESH_NONE;
+    thresh_met = NO_THRESH_MODE;
     mode = NO_MODE;
-
     hide_all_seg_boxes();
-    processed_image.release();
+    //processed_image.release();
    // ui->processed_image_label->hide();
 }
+
+
+
 

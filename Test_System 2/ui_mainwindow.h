@@ -40,8 +40,9 @@ public:
     QLabel *label;
     QLabel *processed_image_label;
     QGroupBox *Segmentation_groupBox;
-    QWidget *layoutWidget;
+    QWidget *widget;
     QHBoxLayout *horizontalLayout;
+    QRadioButton *No_Segmentation_Mode;
     QRadioButton *Sobel;
     QRadioButton *Scharr;
     QRadioButton *Otsu;
@@ -49,14 +50,15 @@ public:
     QRadioButton *Adaptive_Thresholding;
     QCheckBox *Inversion_checkbox;
     QGroupBox *Modes_groupbox;
-    QWidget *layoutWidget1;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_9;
     QRadioButton *No_Mode;
     QRadioButton *Hole_Detection;
     QRadioButton *Growth_detection;
     QGroupBox *Color_spaces_groupBox;
-    QWidget *layoutWidget2;
-    QHBoxLayout *horizontalLayout_10;
+    QWidget *widget1;
+    QHBoxLayout *horizontalLayout_6;
+    QRadioButton *No_Color_Mode;
     QRadioButton *x;
     QRadioButton *y;
     QRadioButton *Y;
@@ -78,7 +80,7 @@ public:
     QCheckBox *Dilation_checkBox;
     QCheckBox *Gaussian_checkBox;
     QGroupBox *Dilation_groupBox;
-    QWidget *layoutWidget3;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_12;
     QSlider *Dilation_horizontalSlider;
     QLCDNumber *Dilation_lcdNumber;
@@ -96,7 +98,7 @@ public:
     QCheckBox *Otsu_in_edge_checkBox;
     QGroupBox *Adaptive_Thresholding_box;
     QGroupBox *groupBox;
-    QWidget *layoutWidget4;
+    QWidget *layoutWidget2;
     QVBoxLayout *verticalLayout;
     QRadioButton *Adaptive_Thresholding_gaussian_radioButton;
     QRadioButton *Adaptive_thresholding_mean_radioButton;
@@ -107,13 +109,13 @@ public:
     QSlider *Adaptive_Thresholding_C_slider;
     QLCDNumber *Adaptive_Thresholding_C_lcdNumber;
     QGroupBox *Local_Otsu_box;
-    QWidget *layoutWidget5;
+    QWidget *layoutWidget3;
     QHBoxLayout *horizontalLayout_2;
     QSlider *Local_Otsu_horizontalSlider;
     QLCDNumber *Local_Otsu_lcdNumber;
     QGroupBox *Local_Scharr_box;
     QGroupBox *Local_Scharr_Histogram;
-    QWidget *layoutWidget6;
+    QWidget *layoutWidget4;
     QHBoxLayout *horizontalLayout_5;
     QSlider *Local_Scharr_histogram_slider;
     QLCDNumber *Local_Scharr_histogram_lcdNumber;
@@ -136,7 +138,7 @@ public:
     QLCDNumber *Local_Scharr_weight_dy_lcdNumber;
     QGroupBox *Local_Sobel_box;
     QGroupBox *Local_Sobel_groupBox;
-    QWidget *layoutWidget7;
+    QWidget *layoutWidget5;
     QHBoxLayout *horizontalLayout_3;
     QSlider *Local_Sobel_horizontalSlider;
     QLCDNumber *Local_Sobel_lcdNumber;
@@ -172,7 +174,7 @@ public:
     QLCDNumber *Sobel_weight_dx_lcdNumber;
     QPushButton *Capture_clean_net_pushButton;
     QGroupBox *Input_Source_groupBox;
-    QWidget *layoutWidget8;
+    QWidget *layoutWidget6;
     QHBoxLayout *horizontalLayout_13;
     QRadioButton *Webcam_source_radioButton;
     QRadioButton *Image_source_radioButton;
@@ -208,147 +210,159 @@ public:
         processed_image_label->setGeometry(QRect(100, 100, 211, 71));
         Segmentation_groupBox = new QGroupBox(centralWidget);
         Segmentation_groupBox->setObjectName(QStringLiteral("Segmentation_groupBox"));
-        Segmentation_groupBox->setGeometry(QRect(0, 44, 625, 45));
-        layoutWidget = new QWidget(Segmentation_groupBox);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(4, 16, 608, 19));
-        horizontalLayout = new QHBoxLayout(layoutWidget);
+        Segmentation_groupBox->setGeometry(QRect(0, 44, 697, 41));
+        widget = new QWidget(Segmentation_groupBox);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(4, 16, 679, 19));
+        horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        Sobel = new QRadioButton(layoutWidget);
+        No_Segmentation_Mode = new QRadioButton(widget);
+        No_Segmentation_Mode->setObjectName(QStringLiteral("No_Segmentation_Mode"));
+        No_Segmentation_Mode->setChecked(true);
+
+        horizontalLayout->addWidget(No_Segmentation_Mode);
+
+        Sobel = new QRadioButton(widget);
         Sobel->setObjectName(QStringLiteral("Sobel"));
 
         horizontalLayout->addWidget(Sobel);
 
-        Scharr = new QRadioButton(layoutWidget);
+        Scharr = new QRadioButton(widget);
         Scharr->setObjectName(QStringLiteral("Scharr"));
 
         horizontalLayout->addWidget(Scharr);
 
-        Otsu = new QRadioButton(layoutWidget);
+        Otsu = new QRadioButton(widget);
         Otsu->setObjectName(QStringLiteral("Otsu"));
 
         horizontalLayout->addWidget(Otsu);
 
-        Thresholding = new QRadioButton(layoutWidget);
+        Thresholding = new QRadioButton(widget);
         Thresholding->setObjectName(QStringLiteral("Thresholding"));
 
         horizontalLayout->addWidget(Thresholding);
 
-        Adaptive_Thresholding = new QRadioButton(layoutWidget);
+        Adaptive_Thresholding = new QRadioButton(widget);
         Adaptive_Thresholding->setObjectName(QStringLiteral("Adaptive_Thresholding"));
 
         horizontalLayout->addWidget(Adaptive_Thresholding);
 
-        Inversion_checkbox = new QCheckBox(layoutWidget);
+        Inversion_checkbox = new QCheckBox(widget);
         Inversion_checkbox->setObjectName(QStringLiteral("Inversion_checkbox"));
 
         horizontalLayout->addWidget(Inversion_checkbox);
 
         Modes_groupbox = new QGroupBox(centralWidget);
         Modes_groupbox->setObjectName(QStringLiteral("Modes_groupbox"));
-        Modes_groupbox->setGeometry(QRect(780, 0, 285, 45));
-        layoutWidget1 = new QWidget(Modes_groupbox);
-        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(0, 20, 279, 19));
-        horizontalLayout_9 = new QHBoxLayout(layoutWidget1);
+        Modes_groupbox->setGeometry(QRect(840, 0, 285, 45));
+        layoutWidget = new QWidget(Modes_groupbox);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 20, 279, 19));
+        horizontalLayout_9 = new QHBoxLayout(layoutWidget);
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
         horizontalLayout_9->setContentsMargins(0, 0, 0, 0);
-        No_Mode = new QRadioButton(layoutWidget1);
+        No_Mode = new QRadioButton(layoutWidget);
         No_Mode->setObjectName(QStringLiteral("No_Mode"));
         No_Mode->setChecked(true);
 
         horizontalLayout_9->addWidget(No_Mode);
 
-        Hole_Detection = new QRadioButton(layoutWidget1);
+        Hole_Detection = new QRadioButton(layoutWidget);
         Hole_Detection->setObjectName(QStringLiteral("Hole_Detection"));
 
         horizontalLayout_9->addWidget(Hole_Detection);
 
-        Growth_detection = new QRadioButton(layoutWidget1);
+        Growth_detection = new QRadioButton(layoutWidget);
         Growth_detection->setObjectName(QStringLiteral("Growth_detection"));
 
         horizontalLayout_9->addWidget(Growth_detection);
 
         Color_spaces_groupBox = new QGroupBox(centralWidget);
         Color_spaces_groupBox->setObjectName(QStringLiteral("Color_spaces_groupBox"));
-        Color_spaces_groupBox->setGeometry(QRect(210, 0, 561, 45));
-        layoutWidget2 = new QWidget(Color_spaces_groupBox);
-        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(0, 20, 547, 19));
-        horizontalLayout_10 = new QHBoxLayout(layoutWidget2);
-        horizontalLayout_10->setSpacing(6);
-        horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
-        x = new QRadioButton(layoutWidget2);
+        Color_spaces_groupBox->setGeometry(QRect(210, 0, 629, 45));
+        widget1 = new QWidget(Color_spaces_groupBox);
+        widget1->setObjectName(QStringLiteral("widget1"));
+        widget1->setGeometry(QRect(4, 20, 618, 19));
+        horizontalLayout_6 = new QHBoxLayout(widget1);
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
+        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
+        No_Color_Mode = new QRadioButton(widget1);
+        No_Color_Mode->setObjectName(QStringLiteral("No_Color_Mode"));
+        No_Color_Mode->setChecked(true);
+
+        horizontalLayout_6->addWidget(No_Color_Mode);
+
+        x = new QRadioButton(widget1);
         x->setObjectName(QStringLiteral("x"));
 
-        horizontalLayout_10->addWidget(x);
+        horizontalLayout_6->addWidget(x);
 
-        y = new QRadioButton(layoutWidget2);
+        y = new QRadioButton(widget1);
         y->setObjectName(QStringLiteral("y"));
 
-        horizontalLayout_10->addWidget(y);
+        horizontalLayout_6->addWidget(y);
 
-        Y = new QRadioButton(layoutWidget2);
+        Y = new QRadioButton(widget1);
         Y->setObjectName(QStringLiteral("Y"));
 
-        horizontalLayout_10->addWidget(Y);
+        horizontalLayout_6->addWidget(Y);
 
-        Red = new QRadioButton(layoutWidget2);
+        Red = new QRadioButton(widget1);
         Red->setObjectName(QStringLiteral("Red"));
 
-        horizontalLayout_10->addWidget(Red);
+        horizontalLayout_6->addWidget(Red);
 
-        Green = new QRadioButton(layoutWidget2);
+        Green = new QRadioButton(widget1);
         Green->setObjectName(QStringLiteral("Green"));
 
-        horizontalLayout_10->addWidget(Green);
+        horizontalLayout_6->addWidget(Green);
 
-        Blue = new QRadioButton(layoutWidget2);
+        Blue = new QRadioButton(widget1);
         Blue->setObjectName(QStringLiteral("Blue"));
 
-        horizontalLayout_10->addWidget(Blue);
+        horizontalLayout_6->addWidget(Blue);
 
-        x2 = new QRadioButton(layoutWidget2);
+        x2 = new QRadioButton(widget1);
         x2->setObjectName(QStringLiteral("x2"));
 
-        horizontalLayout_10->addWidget(x2);
+        horizontalLayout_6->addWidget(x2);
 
-        y2 = new QRadioButton(layoutWidget2);
+        y2 = new QRadioButton(widget1);
         y2->setObjectName(QStringLiteral("y2"));
 
-        horizontalLayout_10->addWidget(y2);
+        horizontalLayout_6->addWidget(y2);
 
-        Y2 = new QRadioButton(layoutWidget2);
+        Y2 = new QRadioButton(widget1);
         Y2->setObjectName(QStringLiteral("Y2"));
 
-        horizontalLayout_10->addWidget(Y2);
+        horizontalLayout_6->addWidget(Y2);
 
-        Lab = new QRadioButton(layoutWidget2);
+        Lab = new QRadioButton(widget1);
         Lab->setObjectName(QStringLiteral("Lab"));
 
-        horizontalLayout_10->addWidget(Lab);
+        horizontalLayout_6->addWidget(Lab);
 
-        L = new QRadioButton(layoutWidget2);
+        L = new QRadioButton(widget1);
         L->setObjectName(QStringLiteral("L"));
 
-        horizontalLayout_10->addWidget(L);
+        horizontalLayout_6->addWidget(L);
 
-        a = new QRadioButton(layoutWidget2);
+        a = new QRadioButton(widget1);
         a->setObjectName(QStringLiteral("a"));
 
-        horizontalLayout_10->addWidget(a);
+        horizontalLayout_6->addWidget(a);
 
-        b = new QRadioButton(layoutWidget2);
+        b = new QRadioButton(widget1);
         b->setObjectName(QStringLiteral("b"));
 
-        horizontalLayout_10->addWidget(b);
+        horizontalLayout_6->addWidget(b);
 
         Bottom_line_box = new QGroupBox(centralWidget);
         Bottom_line_box->setObjectName(QStringLiteral("Bottom_line_box"));
@@ -387,15 +401,15 @@ public:
         Dilation_groupBox = new QGroupBox(Segmentation_enhancing_groupBox);
         Dilation_groupBox->setObjectName(QStringLiteral("Dilation_groupBox"));
         Dilation_groupBox->setGeometry(QRect(4, 40, 150, 40));
-        layoutWidget3 = new QWidget(Dilation_groupBox);
-        layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
-        layoutWidget3->setGeometry(QRect(4, 12, 141, 25));
-        horizontalLayout_12 = new QHBoxLayout(layoutWidget3);
+        layoutWidget1 = new QWidget(Dilation_groupBox);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(4, 12, 141, 25));
+        horizontalLayout_12 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_12->setSpacing(6);
         horizontalLayout_12->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_12->setObjectName(QStringLiteral("horizontalLayout_12"));
         horizontalLayout_12->setContentsMargins(0, 0, 0, 0);
-        Dilation_horizontalSlider = new QSlider(layoutWidget3);
+        Dilation_horizontalSlider = new QSlider(layoutWidget1);
         Dilation_horizontalSlider->setObjectName(QStringLiteral("Dilation_horizontalSlider"));
         Dilation_horizontalSlider->setMinimum(1);
         Dilation_horizontalSlider->setMaximum(10);
@@ -403,7 +417,7 @@ public:
 
         horizontalLayout_12->addWidget(Dilation_horizontalSlider);
 
-        Dilation_lcdNumber = new QLCDNumber(layoutWidget3);
+        Dilation_lcdNumber = new QLCDNumber(layoutWidget1);
         Dilation_lcdNumber->setObjectName(QStringLiteral("Dilation_lcdNumber"));
         Dilation_lcdNumber->setProperty("intValue", QVariant(1));
 
@@ -473,21 +487,21 @@ public:
         groupBox = new QGroupBox(Adaptive_Thresholding_box);
         groupBox->setObjectName(QStringLiteral("groupBox"));
         groupBox->setGeometry(QRect(0, 20, 113, 73));
-        layoutWidget4 = new QWidget(groupBox);
-        layoutWidget4->setObjectName(QStringLiteral("layoutWidget4"));
-        layoutWidget4->setGeometry(QRect(5, 13, 68, 42));
-        verticalLayout = new QVBoxLayout(layoutWidget4);
+        layoutWidget2 = new QWidget(groupBox);
+        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(5, 13, 68, 42));
+        verticalLayout = new QVBoxLayout(layoutWidget2);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        Adaptive_Thresholding_gaussian_radioButton = new QRadioButton(layoutWidget4);
+        Adaptive_Thresholding_gaussian_radioButton = new QRadioButton(layoutWidget2);
         Adaptive_Thresholding_gaussian_radioButton->setObjectName(QStringLiteral("Adaptive_Thresholding_gaussian_radioButton"));
         Adaptive_Thresholding_gaussian_radioButton->setChecked(true);
 
         verticalLayout->addWidget(Adaptive_Thresholding_gaussian_radioButton);
 
-        Adaptive_thresholding_mean_radioButton = new QRadioButton(layoutWidget4);
+        Adaptive_thresholding_mean_radioButton = new QRadioButton(layoutWidget2);
         Adaptive_thresholding_mean_radioButton->setObjectName(QStringLiteral("Adaptive_thresholding_mean_radioButton"));
 
         verticalLayout->addWidget(Adaptive_thresholding_mean_radioButton);
@@ -527,15 +541,15 @@ public:
         Local_Otsu_box = new QGroupBox(Bottom_line_box);
         Local_Otsu_box->setObjectName(QStringLiteral("Local_Otsu_box"));
         Local_Otsu_box->setGeometry(QRect(300, 20, 380, 100));
-        layoutWidget5 = new QWidget(Local_Otsu_box);
-        layoutWidget5->setObjectName(QStringLiteral("layoutWidget5"));
-        layoutWidget5->setGeometry(QRect(8, 48, 156, 25));
-        horizontalLayout_2 = new QHBoxLayout(layoutWidget5);
+        layoutWidget3 = new QWidget(Local_Otsu_box);
+        layoutWidget3->setObjectName(QStringLiteral("layoutWidget3"));
+        layoutWidget3->setGeometry(QRect(8, 48, 156, 25));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget3);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        Local_Otsu_horizontalSlider = new QSlider(layoutWidget5);
+        Local_Otsu_horizontalSlider = new QSlider(layoutWidget3);
         Local_Otsu_horizontalSlider->setObjectName(QStringLiteral("Local_Otsu_horizontalSlider"));
         Local_Otsu_horizontalSlider->setMinimum(1);
         Local_Otsu_horizontalSlider->setMaximum(60);
@@ -544,7 +558,7 @@ public:
 
         horizontalLayout_2->addWidget(Local_Otsu_horizontalSlider);
 
-        Local_Otsu_lcdNumber = new QLCDNumber(layoutWidget5);
+        Local_Otsu_lcdNumber = new QLCDNumber(layoutWidget3);
         Local_Otsu_lcdNumber->setObjectName(QStringLiteral("Local_Otsu_lcdNumber"));
         Local_Otsu_lcdNumber->setProperty("intValue", QVariant(25));
 
@@ -556,15 +570,15 @@ public:
         Local_Scharr_Histogram = new QGroupBox(Local_Scharr_box);
         Local_Scharr_Histogram->setObjectName(QStringLiteral("Local_Scharr_Histogram"));
         Local_Scharr_Histogram->setGeometry(QRect(0, 56, 170, 45));
-        layoutWidget6 = new QWidget(Local_Scharr_Histogram);
-        layoutWidget6->setObjectName(QStringLiteral("layoutWidget6"));
-        layoutWidget6->setGeometry(QRect(4, 12, 156, 25));
-        horizontalLayout_5 = new QHBoxLayout(layoutWidget6);
+        layoutWidget4 = new QWidget(Local_Scharr_Histogram);
+        layoutWidget4->setObjectName(QStringLiteral("layoutWidget4"));
+        layoutWidget4->setGeometry(QRect(4, 12, 156, 25));
+        horizontalLayout_5 = new QHBoxLayout(layoutWidget4);
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
         horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
-        Local_Scharr_histogram_slider = new QSlider(layoutWidget6);
+        Local_Scharr_histogram_slider = new QSlider(layoutWidget4);
         Local_Scharr_histogram_slider->setObjectName(QStringLiteral("Local_Scharr_histogram_slider"));
         Local_Scharr_histogram_slider->setMinimum(60);
         Local_Scharr_histogram_slider->setMaximum(99);
@@ -573,7 +587,7 @@ public:
 
         horizontalLayout_5->addWidget(Local_Scharr_histogram_slider);
 
-        Local_Scharr_histogram_lcdNumber = new QLCDNumber(layoutWidget6);
+        Local_Scharr_histogram_lcdNumber = new QLCDNumber(layoutWidget4);
         Local_Scharr_histogram_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_histogram_lcdNumber"));
         Local_Scharr_histogram_lcdNumber->setProperty("intValue", QVariant(90));
 
@@ -672,15 +686,15 @@ public:
         Local_Sobel_groupBox = new QGroupBox(Local_Sobel_box);
         Local_Sobel_groupBox->setObjectName(QStringLiteral("Local_Sobel_groupBox"));
         Local_Sobel_groupBox->setGeometry(QRect(0, 30, 170, 45));
-        layoutWidget7 = new QWidget(Local_Sobel_groupBox);
-        layoutWidget7->setObjectName(QStringLiteral("layoutWidget7"));
-        layoutWidget7->setGeometry(QRect(4, 12, 156, 25));
-        horizontalLayout_3 = new QHBoxLayout(layoutWidget7);
+        layoutWidget5 = new QWidget(Local_Sobel_groupBox);
+        layoutWidget5->setObjectName(QStringLiteral("layoutWidget5"));
+        layoutWidget5->setGeometry(QRect(4, 12, 156, 25));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget5);
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        Local_Sobel_horizontalSlider = new QSlider(layoutWidget7);
+        Local_Sobel_horizontalSlider = new QSlider(layoutWidget5);
         Local_Sobel_horizontalSlider->setObjectName(QStringLiteral("Local_Sobel_horizontalSlider"));
         Local_Sobel_horizontalSlider->setMinimum(1);
         Local_Sobel_horizontalSlider->setMaximum(40);
@@ -689,7 +703,7 @@ public:
 
         horizontalLayout_3->addWidget(Local_Sobel_horizontalSlider);
 
-        Local_Sobel_lcdNumber = new QLCDNumber(layoutWidget7);
+        Local_Sobel_lcdNumber = new QLCDNumber(layoutWidget5);
         Local_Sobel_lcdNumber->setObjectName(QStringLiteral("Local_Sobel_lcdNumber"));
         Local_Sobel_lcdNumber->setProperty("intValue", QVariant(25));
 
@@ -857,43 +871,43 @@ public:
 
         Capture_clean_net_pushButton = new QPushButton(centralWidget);
         Capture_clean_net_pushButton->setObjectName(QStringLiteral("Capture_clean_net_pushButton"));
-        Capture_clean_net_pushButton->setGeometry(QRect(1070, 20, 97, 23));
+        Capture_clean_net_pushButton->setGeometry(QRect(1140, 16, 97, 23));
         Input_Source_groupBox = new QGroupBox(centralWidget);
         Input_Source_groupBox->setObjectName(QStringLiteral("Input_Source_groupBox"));
         Input_Source_groupBox->setGeometry(QRect(0, 0, 201, 45));
-        layoutWidget8 = new QWidget(Input_Source_groupBox);
-        layoutWidget8->setObjectName(QStringLiteral("layoutWidget8"));
-        layoutWidget8->setGeometry(QRect(10, 20, 182, 19));
-        horizontalLayout_13 = new QHBoxLayout(layoutWidget8);
+        layoutWidget6 = new QWidget(Input_Source_groupBox);
+        layoutWidget6->setObjectName(QStringLiteral("layoutWidget6"));
+        layoutWidget6->setGeometry(QRect(10, 20, 182, 19));
+        horizontalLayout_13 = new QHBoxLayout(layoutWidget6);
         horizontalLayout_13->setSpacing(6);
         horizontalLayout_13->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
         horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
-        Webcam_source_radioButton = new QRadioButton(layoutWidget8);
+        Webcam_source_radioButton = new QRadioButton(layoutWidget6);
         Webcam_source_radioButton->setObjectName(QStringLiteral("Webcam_source_radioButton"));
         Webcam_source_radioButton->setChecked(true);
 
         horizontalLayout_13->addWidget(Webcam_source_radioButton);
 
-        Image_source_radioButton = new QRadioButton(layoutWidget8);
+        Image_source_radioButton = new QRadioButton(layoutWidget6);
         Image_source_radioButton->setObjectName(QStringLiteral("Image_source_radioButton"));
 
         horizontalLayout_13->addWidget(Image_source_radioButton);
 
-        Video_source_radioButton = new QRadioButton(layoutWidget8);
+        Video_source_radioButton = new QRadioButton(layoutWidget6);
         Video_source_radioButton->setObjectName(QStringLiteral("Video_source_radioButton"));
 
         horizontalLayout_13->addWidget(Video_source_radioButton);
 
         Gradient_equalizer_checkBox = new QCheckBox(centralWidget);
         Gradient_equalizer_checkBox->setObjectName(QStringLiteral("Gradient_equalizer_checkBox"));
-        Gradient_equalizer_checkBox->setGeometry(QRect(632, 60, 133, 17));
+        Gradient_equalizer_checkBox->setGeometry(QRect(700, 60, 133, 17));
         Morphological_gradient_equalizer_checkBox = new QCheckBox(centralWidget);
         Morphological_gradient_equalizer_checkBox->setObjectName(QStringLiteral("Morphological_gradient_equalizer_checkBox"));
-        Morphological_gradient_equalizer_checkBox->setGeometry(QRect(772, 60, 201, 17));
+        Morphological_gradient_equalizer_checkBox->setGeometry(QRect(840, 60, 201, 17));
         Morphological_sharpen_checkBox = new QCheckBox(centralWidget);
         Morphological_sharpen_checkBox->setObjectName(QStringLiteral("Morphological_sharpen_checkBox"));
-        Morphological_sharpen_checkBox->setGeometry(QRect(976, 60, 137, 17));
+        Morphological_sharpen_checkBox->setGeometry(QRect(1044, 60, 137, 17));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -930,6 +944,7 @@ public:
         label->setText(QString());
         processed_image_label->setText(QString());
         Segmentation_groupBox->setTitle(QApplication::translate("MainWindow", "Segmentation methods", 0));
+        No_Segmentation_Mode->setText(QApplication::translate("MainWindow", "No Mode", 0));
         Sobel->setText(QApplication::translate("MainWindow", "Sobel", 0));
         Scharr->setText(QApplication::translate("MainWindow", "Scharr", 0));
         Otsu->setText(QApplication::translate("MainWindow", "Otsu's method", 0));
@@ -941,6 +956,7 @@ public:
         Hole_Detection->setText(QApplication::translate("MainWindow", "Hole Detection", 0));
         Growth_detection->setText(QApplication::translate("MainWindow", "Growth Detection", 0));
         Color_spaces_groupBox->setTitle(QApplication::translate("MainWindow", "Color Spaces", 0));
+        No_Color_Mode->setText(QApplication::translate("MainWindow", "No Mode", 0));
         x->setText(QApplication::translate("MainWindow", "x", 0));
         y->setText(QApplication::translate("MainWindow", "y", 0));
         Y->setText(QApplication::translate("MainWindow", "Y", 0));
