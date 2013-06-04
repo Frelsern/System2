@@ -16,11 +16,9 @@ double percentage_foreground(cv::Mat input_image)
     {
         if(data[i] == 255)
         {
-            //qDebug() << "passed if";
            foreground = foreground+1;
         }
     }
- //   qDebug() << "antall hvite pixler funnet" << foreground;
     double percentage = 100.0*foreground/nc;
     return percentage;
 }
@@ -33,12 +31,10 @@ double Growth_Detection_algo(double standard_percentage, cv::Mat input_image)
 
     if(input_image_percentage>standard_percentage)//dont accept negative growth
     {
-       // qDebug() << "aksepterte bilde, positiv vekst";
         diff = input_image_percentage-standard_percentage;
         diff = diff*100/(100-standard_percentage);//rescaling difference to percentage of growth from standard growth to full growth
 
     }
 
     return diff;
-
 }

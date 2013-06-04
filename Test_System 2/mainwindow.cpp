@@ -107,7 +107,6 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
             processed_image = b_space(input_image);
             break;
         }
-
         //Smoothing image before thresholding
         if(ui->Gaussian_checkBox->isChecked() && !processed_image.empty())
         {
@@ -129,7 +128,6 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
         {
             processed_image = Morpological_contrast_enhancement(processed_image);
         }
-
         //thresholding
         switch(thresh_met)
         {
@@ -162,7 +160,6 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
                                                     ui->Adaptive_Thresholding_gaussian_radioButton->isChecked());
             break;
         }
-
         //operations to improve the segmentation result
         if(!Segmented_image.empty())
         {
@@ -182,7 +179,6 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
                 cv::dilate(Seg_copy,Segmented_image,cv::Mat(),cv::Point(-1,-1),Dilation_iterations,cv::BORDER_CONSTANT,cv::morphologyDefaultBorderValue());
             }
         }
-
         switch(mode)
         {
         case NO_MODE:
@@ -214,7 +210,6 @@ void MainWindow::on_No_Segmentation_Mode_clicked()
 void MainWindow::on_Sobel_clicked()
 {
     thresh_met = SOBEL;
-    //hide the different group boxes and show the local sobel one.
     hide_all_seg_boxes();
     ui->Local_Sobel_box->show();
 }
@@ -222,7 +217,6 @@ void MainWindow::on_Sobel_clicked()
 void MainWindow::on_Scharr_clicked()
 {
     thresh_met = SCHARR;
-    //hide the different group boxes and show the global sobel one.
     hide_all_seg_boxes();
     ui->Local_Scharr_box->show();
 
@@ -231,7 +225,6 @@ void MainWindow::on_Scharr_clicked()
 void MainWindow::on_Otsu_clicked()
 {
     thresh_met = OTSU;
-    //hide the different group boxes and show the global sobel one.
     hide_all_seg_boxes();
     ui->Local_Otsu_box->show();
 }
@@ -239,7 +232,6 @@ void MainWindow::on_Otsu_clicked()
 void MainWindow::on_Thresholding_clicked()
 {
     thresh_met = THRESHOLDING;
-    //hide the different group boxes and show the thresholding one.
     hide_all_seg_boxes();
     ui->Thresholding_box->show();
 }
@@ -247,7 +239,6 @@ void MainWindow::on_Thresholding_clicked()
 void MainWindow::on_Adaptive_Thresholding_clicked()
 {
     thresh_met = ADAPTIVE_THRESHOLDING;
-    //hide the different group boxes and show the thresholding one.
     hide_all_seg_boxes();
     ui->Adaptive_Thresholding_box->show();
 }
@@ -272,15 +263,7 @@ void MainWindow::on_Local_Otsu_horizontalSlider_valueChanged(int value)
 
 void MainWindow::on_Capture_clicked()
 {
-    /*if(!Segmented_image.empty())
-    {
-        imwrite("Segmented_Image.png", Segmented_image );
-    }
-
-    if(!hole_detected_image.empty())
-    {
-        imwrite("Hole_detected_Image.png", hole_detected_image );
-    }*/
+    capture = true;
 }
 
 void MainWindow::on_Local_Sobel_histogram_slider_valueChanged(int value)
@@ -399,13 +382,11 @@ void MainWindow::on_Gaussian_horizontalSlider_valueChanged(int value)
 void MainWindow::on_Local_Sobel_dx_slider_valueChanged(int value)
 {
     Local_Sobel_dx = value;
-
 }
 
 void MainWindow::on_Local_Sobel_dy_slider_valueChanged(int value)
 {
     Local_Sobel_dy = value;
-
 }
 
 void MainWindow::on_Local_Sobel_kernel_slider_valueChanged(int value)
@@ -425,7 +406,6 @@ void MainWindow::on_Adaptive_Thresholding_kernel_slider_valueChanged(int value)
         Adaptive_Thresholding_kernel_size = value;
         ui->Adaptive_Thresholding_kernel_lcdNumber->display(value);
     }
-
 }
 
 void MainWindow::on_Adaptive_Thresholding_C_slider_valueChanged(int value)
@@ -437,11 +417,6 @@ void MainWindow::on_Adaptive_Thresholding_C_slider_valueChanged(int value)
 void MainWindow::on_Capture_clean_net_pushButton_clicked()
 {
     capture_clean_net = true;
-    /*if(!Segmented_image.empty())
-    {
-        Percentage_foreground_clean_net = percentage_foreground(Segmented_image);
-    }*/
-
 }
 
 void MainWindow::on_Webcam_source_radioButton_clicked()
@@ -496,17 +471,13 @@ void MainWindow::on_Video_source_radioButton_clicked()
         return;
     }
 
-
     video_file_FPS = capWebcam.get(CV_CAP_PROP_FPS);
     qDebug() << "FPS " << video_file_FPS;
-
 
     tmrTimer = new QTimer(this);
     connect(tmrTimer, SIGNAL(timeout()),this,SLOT(runVideo()));
     //tmrTimer->start(1.0/60); //lavprioritet funksjon, hvis systemet bruker lenger tid får det lov til å btuke lenger tid
     tmrTimer->start(100);
-
-
 }
 
 void MainWindow::runCamera()
@@ -529,7 +500,6 @@ void MainWindow::runCamera()
         duration = static_cast<double>(cv::getTickCount())-duration;
         duration /=cv::getTickFrequency();//elapsed time in ms
         ui->Total_time_spent->appendPlainText(QString::number(duration) + QString("s"));
-
     }
 }
 void MainWindow::runImage()
@@ -547,7 +517,6 @@ void MainWindow::runImage()
         duration = static_cast<double>(cv::getTickCount())-duration;
         duration /=cv::getTickFrequency();//elapsed time in ms
         ui->Total_time_spent->appendPlainText(QString::number(duration) + QString("s"));
-
     }
 }
 void MainWindow::runVideo()
@@ -588,7 +557,6 @@ void MainWindow::runVideo()
                 }
                 end_of_video = true;
             }
-
         }
         //time measurment part
         duration = static_cast<double>(cv::getTickCount())-duration;
@@ -668,6 +636,24 @@ void MainWindow::display_frame(cv::Mat processed_image, cv::Mat segmented_image,
         ui->segmented_image_label->hide();
     }
 
+    if(capture_clean_net)
+    {
+        capture_clean_net = false;
+        Percentage_foreground_clean_net = percentage_foreground(segmented_image);
+    }
+    if(capture)
+    {
+        capture = false;
+        if(!segmented_image.empty())
+        {
+            imwrite("Segmented_Image.png", segmented_image );
+        }
+
+        if(!hole_detected_image.empty())
+        {
+            imwrite("Hole_detected_Image.png", hole_detected_image );
+        }
+    }
 }
 
 

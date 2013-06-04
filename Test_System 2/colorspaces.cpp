@@ -20,7 +20,6 @@ cv::Mat standard_x(cv::Mat input_image)
     }
 
     return output_image;
-
 }
 
 cv::Mat standard_y(cv::Mat input_image)
@@ -76,7 +75,6 @@ cv::Mat custom_x(cv::Mat input_image)
 
     }
     return output_image;
-
 }
 
 cv::Mat custom_y(cv::Mat input_image)
@@ -97,7 +95,6 @@ cv::Mat custom_y(cv::Mat input_image)
         data[i] = 255*((double)XYZ_data[3*i+1])/(XYZ_data[3*i]+XYZ_data[3*i+1]+XYZ_data[3*i+2]) ;//y
     }
     return output_image;
-
 }
 
 cv::Mat custom_Y(cv::Mat input_image)

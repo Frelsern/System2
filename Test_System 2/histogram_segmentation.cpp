@@ -17,23 +17,6 @@ cv::Mat Histogram_seg(int desired_percentage,cv::Mat edge_img,cv::Mat original_i
 
     cv::calcHist(&edge_img,1,0,cv::Mat(),hist,1,&histSize,&histRange,uniform,accumulate);
 
- /*   int hist_w = 512; int hist_h = 400;
-    int bin_w = cvRound((double)hist_w/histSize);
-    cv::Mat histImage(hist_h,hist_w,CV_8U,cv::Scalar(0,0,0));
-
-    //Normalizing the result to [0, histImage.rows]
-    cv::normalize(hist,hist,0,histImage.rows,cv::NORM_MINMAX,-1,cv::Mat() );
-
-    //draw for each channel
-    for (int i = 1;i<histSize;i++)
-    {
-        cv::line(histImage,cv::Point(bin_w*(i-1), hist_h - cvRound(hist.at<float>(i-1)) ),
-                 cv::Point( bin_w*(i), hist_h-cvRound(hist.at<float>(i)) ),
-                 cv::Scalar(255,0,0),2,8,0 );
-    }//kan droppe den koden her? trenger vel ikke å tege opp histogrammet, inegn som skal se det
-    */
-
-
     //percentile2i from Digital image processing using matlab-----------------------//
     float sum = 0;
     float* data = hist.ptr<float>(0);
@@ -98,7 +81,6 @@ cv::Mat Histogram_seg(int desired_percentage,cv::Mat edge_img,cv::Mat original_i
     output_img = Otsu_on_Histo(final_hist, original_image);
 
     return output_img;//change after finisheed
-
 }
 
 cv::Mat Histogram_seg(int desired_percentage,cv::Mat edge_img)
@@ -176,9 +158,7 @@ cv::Mat Histogram_seg(int desired_percentage,cv::Mat edge_img)
     }
 
     //-----------------------------------------------------------------------------//
-
     return edge_img;
-
 }
 
 
@@ -193,7 +173,6 @@ cv::Mat Otsu_on_Histo(cv::Mat histogram, cv::Mat image)
     uchar* hist_data = histogram.ptr<uchar>(0);
 
     hist_data[0] = 0;//the histogram is dominated by 0s, they should however not count for the segmentation
-
 
     for(int i = 0;i<hist_lvls;i++)
     {
@@ -267,5 +246,4 @@ cv::Mat Otsu_on_Histo(cv::Mat histogram, cv::Mat image)
     }
 
     return image;
-
 }
