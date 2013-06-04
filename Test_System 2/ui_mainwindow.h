@@ -38,7 +38,7 @@ public:
     QAction *actionDont_Process;
     QWidget *centralWidget;
     QLabel *label;
-    QLabel *processed_image_label;
+    QLabel *segmented_image_label;
     QGroupBox *Segmentation_groupBox;
     QWidget *widget;
     QHBoxLayout *horizontalLayout;
@@ -205,9 +205,9 @@ public:
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(5, 100, 111, 61));
-        processed_image_label = new QLabel(centralWidget);
-        processed_image_label->setObjectName(QStringLiteral("processed_image_label"));
-        processed_image_label->setGeometry(QRect(100, 100, 211, 71));
+        segmented_image_label = new QLabel(centralWidget);
+        segmented_image_label->setObjectName(QStringLiteral("segmented_image_label"));
+        segmented_image_label->setGeometry(QRect(100, 100, 211, 71));
         Segmentation_groupBox = new QGroupBox(centralWidget);
         Segmentation_groupBox->setObjectName(QStringLiteral("Segmentation_groupBox"));
         Segmentation_groupBox->setGeometry(QRect(0, 44, 697, 41));
@@ -942,7 +942,7 @@ public:
         actionPause->setText(QApplication::translate("MainWindow", "Pause", 0));
         actionDont_Process->setText(QApplication::translate("MainWindow", "Do not Process", 0));
         label->setText(QString());
-        processed_image_label->setText(QString());
+        segmented_image_label->setText(QString());
         Segmentation_groupBox->setTitle(QApplication::translate("MainWindow", "Segmentation methods", 0));
         No_Segmentation_Mode->setText(QApplication::translate("MainWindow", "No Mode", 0));
         Sobel->setText(QApplication::translate("MainWindow", "Sobel", 0));

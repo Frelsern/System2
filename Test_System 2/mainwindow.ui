@@ -39,7 +39,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="processed_image_label">
+   <widget class="QLabel" name="segmented_image_label">
     <property name="geometry">
      <rect>
       <x>100</x>

@@ -37,7 +37,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image);
+    void process_frame(cv::Mat b4_tweak_input_image);
 
     void runCamera();
 
@@ -135,6 +135,8 @@ private slots:
 
     void on_No_Color_Mode_clicked();
 
+    void display_frame(cv::Mat processed_image, cv::Mat segmented_image, cv::Mat hole_detected_image);
+
 private:
     Ui::MainWindow *ui;
     QTimer* tmrTimer;
@@ -143,13 +145,7 @@ private:
 
     cv::Mat image;
     cv::Mat image_from_file;
-    cv::Mat processed_image;
-    // cv::Mat XYZ_image;
-   // cv::Mat XYZ2;
-   // cv::Mat Lab_image;
-    cv::Mat Segmented_image;
-    cv::Mat float_Seg_image;
-    cv::Mat hole_detected_image;
+
 
     int Local_Sobel_numberofSubImages;
     int Local_Sobel_hist_percentile;
@@ -167,6 +163,8 @@ private:
     int Adaptive_thresholding_C;
 
     double Percentage_foreground_clean_net;
+    bool capture_clean_net;
+    bool capture;
 
     QString fileName;
     double video_file_FPS;
@@ -174,7 +172,6 @@ private:
     Color_Space cspace;
     Thresholding_Method thresh_met;
     Mode mode;
-
 
 };
 

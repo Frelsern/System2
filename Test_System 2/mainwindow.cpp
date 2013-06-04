@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     Gaussian_kernel_size = 1;
 
     Percentage_foreground_clean_net = -1;
+    capture_clean_net = false;
+    capture = false;
 
     cspace = COLOR_NONE;
     thresh_met = NO_THRESH_MODE;
@@ -51,13 +53,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
+void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
 {
         //cv::Mat input_image = tweak_video_frame(b4_tweak_input_image);
         cv::Mat input_image;
         b4_tweak_input_image.copyTo(input_image);
 
-        //cv::Mat processed_image,Segmented_image,hole_detected_image;//kan lage de her, men da må jeg lage de en gang hver frame, unødvendig?
+        cv::Mat processed_image,Segmented_image,hole_detected_image;
         cv::Mat lab_image;
         //Converting to the given color space
         switch(cspace)
@@ -128,14 +130,10 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
             processed_image = Morpological_contrast_enhancement(processed_image);
         }
 
-
-
         //thresholding
         switch(thresh_met)
         {
         case NO_THRESH_MODE:
-            //processed_image.copyTo(Segmented_image);
-
             break;
         case SOBEL:
             Segmented_image = Local_Sobel(processed_image,Local_Sobel_numberofSubImages, Local_Sobel_kernel_size,
@@ -185,78 +183,27 @@ void MainWindow::processFrameAndUpdateGUI(cv::Mat b4_tweak_input_image)
             }
         }
 
-        //if a mode is chosen display the modes image instead of the color space image
         switch(mode)
         {
         case NO_MODE:
-            //putting the correct color space image and segmented image on display.
-            if(ui->Lab->isChecked())
-            {
-                QImage color_space_image = QImage((const unsigned char*)(lab_image.data),
-                                    lab_image.cols,lab_image.rows,QImage::Format_RGB888);
-                ui->label->setPixmap(QPixmap::fromImage(color_space_image));
-                ui->label->resize(ui->label->pixmap()->size());
-                ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
-            }
-            else if(!processed_image.empty())
-            {
-                if(processed_image.channels()==1)//display processed image
-                {
-                    QImage color_space_image = QImage((const unsigned char*)(processed_image.data),
-                                         processed_image.cols,processed_image.rows,QImage::Format_Indexed8);
-                    ui->label->setPixmap(QPixmap::fromImage(color_space_image));
-                    ui->label->resize(ui->label->pixmap()->size());
-                    ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
-                }
-                else if(processed_image.channels()==3)//displaying input image
-                {
-                    QImage color_space_image = QImage((const unsigned char*)(processed_image.data),
-                                        processed_image.cols,processed_image.rows,QImage::Format_RGB888);
-                    ui->label->setPixmap(QPixmap::fromImage(color_space_image));
-                    ui->label->resize(ui->label->pixmap()->size());
-                    ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
-                }
-            }
             break;
         case HOLE_DETECTION:
-            //knaksje ta å lage en ny label, hide processed og vise denne, kan bli fixa på knappetrykka
             hole_detected_image = Hole_detection_algo(Segmented_image);
-            if(!hole_detected_image.empty())
-            {
-                QImage hole_detection_image = QImage((const unsigned char*)(hole_detected_image.data),
-                                     hole_detected_image.cols,hole_detected_image.rows,QImage::Format_Indexed8);
-                ui->label->setPixmap(QPixmap::fromImage(hole_detection_image));
-                ui->label->resize(ui->label->pixmap()->size());
-                ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
-            }
             break;
         case GROWTH_DETECTION:
             if((Percentage_foreground_clean_net > -1) && (!Segmented_image.empty()))
             {
                 //gjør noe
-                qDebug() << "percentage foreground pixels on clean net: " << Percentage_foreground_clean_net;
+             //   qDebug() << "percentage foreground pixels on clean net: " << Percentage_foreground_clean_net;
 
                 int percentage_growth = Growth_Detection_algo(Percentage_foreground_clean_net,Segmented_image);
-                qDebug() << "percentage growth: " << percentage_growth;
-
-
+               // qDebug() << "percentage growth: " << percentage_growth;
             }
             break;
-
         }
 
-        //Show the segmented image in the right label
-        if((!Segmented_image.empty())&& (Segmented_image.channels()!=3) )
-        {
-            QImage segmented_image = QImage((const unsigned char*)(Segmented_image.data),
-                                            Segmented_image.cols,Segmented_image.rows,QImage::Format_Indexed8 );
-            ui->processed_image_label->setGeometry(100+ui->label->width(),100,0,0);
-            ui->processed_image_label->setPixmap(QPixmap::fromImage(segmented_image));
-            ui->processed_image_label->resize(ui->label->pixmap()->size());
-        }
+        display_frame(processed_image,Segmented_image,hole_detected_image);
 }
-
-
 
 void MainWindow::on_No_Segmentation_Mode_clicked()
 {
@@ -325,7 +272,7 @@ void MainWindow::on_Local_Otsu_horizontalSlider_valueChanged(int value)
 
 void MainWindow::on_Capture_clicked()
 {
-    if(!Segmented_image.empty())
+    /*if(!Segmented_image.empty())
     {
         imwrite("Segmented_Image.png", Segmented_image );
     }
@@ -333,7 +280,7 @@ void MainWindow::on_Capture_clicked()
     if(!hole_detected_image.empty())
     {
         imwrite("Hole_detected_Image.png", hole_detected_image );
-    }
+    }*/
 }
 
 void MainWindow::on_Local_Sobel_histogram_slider_valueChanged(int value)
@@ -489,14 +436,14 @@ void MainWindow::on_Adaptive_Thresholding_C_slider_valueChanged(int value)
 
 void MainWindow::on_Capture_clean_net_pushButton_clicked()
 {
-    if(!Segmented_image.empty())
+    capture_clean_net = true;
+    /*if(!Segmented_image.empty())
     {
         Percentage_foreground_clean_net = percentage_foreground(Segmented_image);
-    }
+    }*/
 
 }
 
-//bygg om processframe and update gui
 void MainWindow::on_Webcam_source_radioButton_clicked()
 {
     capWebcam.release();
@@ -576,7 +523,7 @@ void MainWindow::runCamera()
         //change color channel ordering
         cv::cvtColor(camera_image,camera_image,CV_BGR2RGB);
 
-        MainWindow::processFrameAndUpdateGUI(camera_image);
+        MainWindow::process_frame(camera_image);
 
         //time measurment part
         duration = static_cast<double>(cv::getTickCount())-duration;
@@ -594,7 +541,7 @@ void MainWindow::runImage()
         double duration;
         duration = static_cast<double>(cv::getTickCount());
 
-        MainWindow::processFrameAndUpdateGUI(image_from_file);
+        MainWindow::process_frame(image_from_file);
 
         //time measurment part
         duration = static_cast<double>(cv::getTickCount())-duration;
@@ -612,9 +559,6 @@ void MainWindow::runVideo()
 
         cv::Mat video_frame;
 
-
-
-        //lag en ting som sykler ut frames på balgrunn av framerate kontra prosseseringstid
         bool end_of_video = false;
         int frame_not_found = 0; //gives the system the chance to process videos missing frames
         while(end_of_video==false)
@@ -625,7 +569,7 @@ void MainWindow::runVideo()
             {
                 cv::cvtColor(video_frame,video_frame,CV_BGR2RGB);
                 //qDebug() << "valid frame" << video_frame.cols << video_frame.rows;
-                MainWindow::processFrameAndUpdateGUI(video_frame);
+                MainWindow::process_frame(video_frame);
                 end_of_video = true;
             }
             else
@@ -646,15 +590,11 @@ void MainWindow::runVideo()
             }
 
         }
-
-
         //time measurment part
         duration = static_cast<double>(cv::getTickCount())-duration;
         duration /=cv::getTickFrequency();//elapsed time in ms
         ui->Total_time_spent->appendPlainText(QString::number(duration) + QString("s"));
-
     }
-
 }
 
 void MainWindow::on_actionPause_triggered()
@@ -676,10 +616,59 @@ void MainWindow::on_actionDont_Process_triggered()
     thresh_met = NO_THRESH_MODE;
     mode = NO_MODE;
     hide_all_seg_boxes();
-    //processed_image.release();
-   // ui->processed_image_label->hide();
 }
 
+void MainWindow::display_frame(cv::Mat processed_image, cv::Mat segmented_image, cv::Mat hole_detected_image)
+{
+    if(!processed_image.empty())
+    {
+        if(processed_image.channels()==3)
+        {
+        ui->segmented_image_label->hide();
+        QImage color_space_image = QImage((const unsigned char*)(processed_image.data),
+                            processed_image.cols,processed_image.rows,QImage::Format_RGB888);
+        ui->label->setPixmap(QPixmap::fromImage(color_space_image));
+        ui->label->resize(ui->label->pixmap()->size());
+        ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+
+        }
+        else if(processed_image.channels()==1)
+        {
+            if(hole_detected_image.empty())
+            {
+                QImage color_space_image = QImage((const unsigned char*)(processed_image.data),
+                                     processed_image.cols,processed_image.rows,QImage::Format_Indexed8);
+                ui->label->setPixmap(QPixmap::fromImage(color_space_image));
+                ui->label->resize(ui->label->pixmap()->size());
+                ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+            }
+            else
+            {
+                QImage hole_detection_image = QImage((const unsigned char*)(hole_detected_image.data),
+                                     hole_detected_image.cols,hole_detected_image.rows,QImage::Format_Indexed8);
+                ui->label->setPixmap(QPixmap::fromImage(hole_detection_image));
+                ui->label->resize(ui->label->pixmap()->size());
+                ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+            }
+
+        }
+    }
+    if(!segmented_image.empty() && segmented_image.channels()==1)
+    {
+        ui->segmented_image_label->show();
+        QImage segmented_qimage = QImage((const unsigned char*)(segmented_image.data),
+                                        segmented_image.cols,segmented_image.rows,QImage::Format_Indexed8 );
+        ui->segmented_image_label->setGeometry(100+ui->label->width(),100,0,0);
+        ui->segmented_image_label->setPixmap(QPixmap::fromImage(segmented_qimage));
+        ui->segmented_image_label->resize(ui->segmented_image_label->pixmap()->size());
+
+    }
+    else
+    {
+        ui->segmented_image_label->hide();
+    }
+
+}
 
 
 
