@@ -144,11 +144,8 @@ cv::Vec6i Region_Growing(cv::Mat input_img,int x, int y, int color)
                         returned_param[1]=a(0)+1;
                     }
                 }
-
             }
-
         }
-
     }
 
     if(((returned_param[0]==0)&&(returned_param[1]==input_img.rows-1)) || ((returned_param[2]==0)&&(returned_param[3]==input_img.cols-1)))
