@@ -5,7 +5,7 @@
 
 void MainWindow::hide_all_seg_boxes()
 {
-    ui->Local_Sobel_box->hide();
+    ui->Sobel_box->hide();
     ui->Local_Scharr_box->hide();
     ui->Local_Otsu_box->hide();
     ui->Thresholding_box->hide();
@@ -24,8 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
     hide_all_seg_boxes();
 
     //initializing parameters.
-    Local_Sobel_numberofSubImages = 5;
-    Local_Sobel_hist_percentile = 90;
+    Local_Sobel_numberofSubImages = 1;
+    Local_Sobel_hist_percentile = 70;
     Local_Sobel_dx = 1;
     Local_Sobel_dy = 1;
     Local_Sobel_kernel_size = 3;
@@ -55,9 +55,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
 {
-        //cv::Mat input_image = tweak_video_frame(b4_tweak_input_image);
-        cv::Mat input_image;
-        b4_tweak_input_image.copyTo(input_image);
+        cv::Mat input_image = tweak_video_frame(b4_tweak_input_image);
+        //cv::Mat input_image;
+        //b4_tweak_input_image.copyTo(input_image);
 
         cv::Mat processed_image,Segmented_image,hole_detected_image;
         cv::Mat lab_image;
@@ -211,7 +211,7 @@ void MainWindow::on_Sobel_clicked()
 {
     thresh_met = SOBEL;
     hide_all_seg_boxes();
-    ui->Local_Sobel_box->show();
+    ui->Sobel_box->show();
 }
 
 void MainWindow::on_Scharr_clicked()

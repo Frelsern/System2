@@ -64,7 +64,7 @@
     <property name="title">
      <string>Segmentation methods</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>4</x>
@@ -190,7 +190,7 @@
     <property name="title">
      <string>Color Spaces</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>4</x>
@@ -407,6 +407,9 @@
       </property>
       <property name="text">
        <string>Dilation</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QCheckBox" name="Gaussian_checkBox">
@@ -1043,7 +1046,7 @@ Edge Segmentation
       </widget>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="Local_Sobel_box">
+    <widget class="QGroupBox" name="Sobel_box">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -1055,7 +1058,7 @@ Edge Segmentation
      <property name="title">
       <string>Local Sobel</string>
      </property>
-     <widget class="QGroupBox" name="Local_Sobel_groupBox">
+     <widget class="QGroupBox" name="Local_Sobel_sub_images_groupBox">
       <property name="geometry">
        <rect>
         <x>0</x>
@@ -1086,7 +1089,10 @@ Edge Segmentation
            <number>40</number>
           </property>
           <property name="value">
-           <number>5</number>
+           <number>1</number>
+          </property>
+          <property name="sliderPosition">
+           <number>1</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -1096,7 +1102,7 @@ Edge Segmentation
         <item>
          <widget class="QLCDNumber" name="Local_Sobel_lcdNumber">
           <property name="intValue" stdset="0">
-           <number>25</number>
+           <number>1</number>
           </property>
          </widget>
         </item>
@@ -1128,13 +1134,13 @@ Edge Segmentation
         <item>
          <widget class="QSlider" name="Local_Sobel_histogram_slider">
           <property name="minimum">
-           <number>60</number>
+           <number>40</number>
           </property>
           <property name="maximum">
            <number>99</number>
           </property>
           <property name="sliderPosition">
-           <number>90</number>
+           <number>70</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -1144,7 +1150,7 @@ Edge Segmentation
         <item>
          <widget class="QLCDNumber" name="Local_Sobel_histogram_lcdNumber">
           <property name="intValue" stdset="0">
-           <number>90</number>
+           <number>70</number>
           </property>
          </widget>
         </item>
@@ -1380,7 +1386,10 @@ Edge Segmentation
            <number>100</number>
           </property>
           <property name="value">
-           <number>50</number>
+           <number>100</number>
+          </property>
+          <property name="sliderPosition">
+           <number>100</number>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -1393,10 +1402,10 @@ Edge Segmentation
            <bool>false</bool>
           </property>
           <property name="value" stdset="0">
-           <double>50.000000000000000</double>
+           <double>100.000000000000000</double>
           </property>
           <property name="intValue" stdset="0">
-           <number>50</number>
+           <number>100</number>
           </property>
          </widget>
         </item>

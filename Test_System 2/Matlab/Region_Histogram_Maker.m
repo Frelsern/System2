@@ -6,6 +6,9 @@ x = 1:max(regions);
 for k = 1:max(regions)
     num_el = size(find(regions==k));
     histogram(k) = num_el(2);
+%     if k < 11
+%         histogram(k) = 0;
+%     end
 end
 
 end

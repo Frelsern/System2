@@ -34,7 +34,7 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                     area = region[4];
 
                     printed_region_size_list.append(area);
-                    if(area>500)//to prevent small pixel areas to count
+                    if(area>50)//to prevent small pixel areas to count
                     {
                         region_size_list.append(area);
                         region_list.append(region);
