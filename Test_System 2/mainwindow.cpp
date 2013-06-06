@@ -113,20 +113,20 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
             cv::GaussianBlur(processed_image,processed_image,cv::Size(Gaussian_kernel_size,Gaussian_kernel_size),0,0,cv::BORDER_DEFAULT);
         }
         //Light gradient equalization
-        if(ui->Gradient_equalizer_checkBox->isChecked())
+        if((ui->Gradient_equalizer_checkBox->isChecked()) && (processed_image.channels()==1))
         {
-            processed_image = Light_gradient_equalizer(processed_image);
+            //processed_image = Light_gradient_equalizer(processed_image);
         }
 
-        if(ui->Morphological_gradient_equalizer_checkBox->isChecked() && !processed_image.empty())
+        if(ui->Morphological_gradient_equalizer_checkBox->isChecked() && processed_image.channels()==1)
         {
-            processed_image = Morpological_light_gradient_equalizer(processed_image);
+            //processed_image = Morpological_light_gradient_equalizer(processed_image);
 
         }
 
-        if(ui->Morphological_sharpen_checkBox->isChecked() && !processed_image.empty())
+        if(ui->Morphological_sharpen_checkBox->isChecked() && processed_image.channels()==1)
         {
-            processed_image = Morpological_contrast_enhancement(processed_image);
+            //processed_image = Morpological_contrast_enhancement(processed_image);
         }
         //thresholding
         switch(thresh_met)

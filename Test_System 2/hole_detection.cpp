@@ -12,7 +12,9 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
         QList<int> region_size_list;
         QList<cv::Vec6i> region_list;//[uppermost,furthest down,leftmost,rightmost,area,0]
         cv::Vec6i region;//kan bygge om til 4i, hvis nødvendig fordi topmost er den vi sender inn
+        QList<int> printed_region_size_list;
         input_img.copyTo(output_img);
+
         int area;
         int color = 50;
 
@@ -30,6 +32,8 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                         color = 50;
                     }
                     area = region[4];
+
+                    printed_region_size_list.append(area);
                     if(area>500)//to prevent small pixel areas to count
                     {
                         region_size_list.append(area);
@@ -38,6 +42,41 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                 }
             }
         }
+        //temp part to print full region list
+        if(printed_region_size_list.size()>0)
+        {
+            qSort(printed_region_size_list.begin(),printed_region_size_list.end());
+
+            QString outputFilename = "region_sizes.txt";
+            QFile outputFile(outputFilename);
+            outputFile.open(QIODevice::WriteOnly);
+
+            if(!outputFile.isOpen())
+            {
+                qDebug() << "klarte ikke å åpne";
+
+            }
+            else
+            {
+                QTextStream outStream(&outputFile);
+
+                foreach(int size,printed_region_size_list)
+                {
+                    outStream << QString::number(size);
+                    outStream << ",";
+                }
+
+                outputFile.close();
+
+
+            }
+
+
+
+        }
+
+
+
 
         //can instead make a sorting algorithm and not use an area list AND a coordinate list as now
         if(region_size_list.size()>0)
@@ -52,6 +91,7 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                 //region_list.removeFirst();//removes the item being examined
                 //qDebug() << "antall removed" << antall;
                 //antall+=1;
+
                 //if the area in question is over three times the median area of the region_size_list then draw a circle around it
                 if(a(4) >=  3*median_area)
                 {
@@ -61,6 +101,8 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
             }
         }
     }
+
+
 
     return output_img;
 }
@@ -159,5 +201,4 @@ cv::Vec6i Region_Growing(cv::Mat input_img,int x, int y, int color)
     }
 
     return returned_param;
-    //return growing_list;
 }
