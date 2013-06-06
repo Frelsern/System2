@@ -12,7 +12,7 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
         QList<int> region_size_list;
         QList<cv::Vec6i> region_list;//[uppermost,furthest down,leftmost,rightmost,area,0]
         cv::Vec6i region;//kan bygge om til 4i, hvis nødvendig fordi topmost er den vi sender inn
-        QList<int> printed_region_size_list;
+        //QList<int> printed_region_size_list;
         input_img.copyTo(output_img);
 
         int area;
@@ -33,8 +33,8 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                     }
                     area = region[4];
 
-                    printed_region_size_list.append(area);
-                    if(area>50)//to prevent small pixel areas to count
+                    //printed_region_size_list.append(area);
+                    if(area>10)//to prevent small pixel areas to count
                     {
                         region_size_list.append(area);
                         region_list.append(region);
@@ -43,13 +43,14 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
             }
         }
         //temp part to print full region list
-        if(printed_region_size_list.size()>0)
+        if(region_size_list.size()>0)
         {
-            qSort(printed_region_size_list.begin(),printed_region_size_list.end());
+            qSort(region_size_list.begin(),region_size_list.end());
 
             QString outputFilename = "region_sizes.txt";
             QFile outputFile(outputFilename);
             outputFile.open(QIODevice::WriteOnly);
+
 
             if(!outputFile.isOpen())
             {
@@ -60,23 +61,16 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
             {
                 QTextStream outStream(&outputFile);
 
-                foreach(int size,printed_region_size_list)
+
+                foreach(cv::Vec6i a ,region_list)
                 {
-                    outStream << QString::number(size);
+                    outStream << QString::number(a(4));
                     outStream << ",";
                 }
 
                 outputFile.close();
-
-
             }
-
-
-
         }
-
-
-
 
         //can instead make a sorting algorithm and not use an area list AND a coordinate list as now
         if(region_size_list.size()>0)
@@ -86,7 +80,11 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
 
             //qDebug() << "lista har" << region_size_list.size()<<"elementer";
             //int antall=1;
-            foreach(cv::Vec6i a ,region_list)
+            /*QString suspectFilename = "suspect_region_sizes.txt";
+            QFile suspectFile(suspectFilename);
+            suspectFile.open(QIODevice::WriteOnly);
+            QTextStream suspectStream(&suspectFile);*/
+            foreach(cv::Vec6i a ,region_list)//[uppermost,furthest down,leftmost,rightmost,area,0]
             {
                 //region_list.removeFirst();//removes the item being examined
                 //qDebug() << "antall removed" << antall;
@@ -98,14 +96,25 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                    //drawing on image
                    cv::circle(output_img,cv::Point(a(2)+(a(3)-a(2))/2,a(0)+(a(1)-a(0))/2),(int)(a(1)-a(0))/2,0,4,8,0);
                 }
+               /* if(a(4)<100)
+                {
+                    suspectStream << QString::number(a(4));
+                    suspectStream << ",";
+                    suspectStream << QString::number(a(0));
+                    suspectStream << ",";
+                    suspectStream << QString::number(a(2));
+                    suspectStream << ",";
+
+                }*/
+
             }
         }
     }
 
 
-
     return output_img;
 }
+
 
 //Grows region from a seed pixel, if the region contains pixels at the top AND bottom border
 //or left AND right border the area is set to 0 to exclude the region from further processing
@@ -190,6 +199,7 @@ cv::Vec6i Region_Growing(cv::Mat input_img,int x, int y, int color)
         }
     }
 
+    //testing to see if area crosses the screen, field test specific!
     if(((returned_param[0]==0)&&(returned_param[1]==input_img.rows-1)) || ((returned_param[2]==0)&&(returned_param[3]==input_img.cols-1)))
     {
         returned_param[4] = 0;

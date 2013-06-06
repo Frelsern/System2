@@ -185,6 +185,7 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
             break;
         case HOLE_DETECTION:
             hole_detected_image = Hole_detection_algo(Segmented_image);
+           // imwrite("Hole_detected_Image.png", hole_detected_image );
             break;
         case GROWTH_DETECTION:
             if((Percentage_foreground_clean_net > -1) && (!Segmented_image.empty()))

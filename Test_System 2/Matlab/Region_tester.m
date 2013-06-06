@@ -4,7 +4,7 @@ close all
 
 
 % reading in filw with region sizes
-text_Regions = fileread('ref_vid_region_sizes_tweaked_image.txt');
+text_Regions = fileread('new_ref_vid_tweak_region_sizes.txt');
 Regions = str2num(text_Regions);
 
 [histogram,x] = Region_Histogram_Maker(Regions);
