@@ -7,6 +7,7 @@ void MainWindow::hide_all_seg_boxes()
 {
     ui->Sobel_box->hide();
     ui->Local_Scharr_box->hide();
+    ui->Laplacian_box->hide();
     ui->Local_Otsu_box->hide();
     ui->Thresholding_box->hide();
     ui->Adaptive_Thresholding_box->hide();
@@ -31,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent) :
     Local_Sobel_kernel_size = 3;
     Local_Scharr_numberofSubImages = 5;
     Local_Scharr_hist_percentile = 90;
+    Laplacian_numberofSubImages = 1;
+    Laplacian_hist_percentile = 70;
+    Laplacian_kernel_size = 3;
     Local_Otsu_numberofSubImages = 5;
     Naive_threshold = 90;
     Adaptive_Thresholding_kernel_size = 3;
@@ -115,18 +119,18 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
         //Light gradient equalization
         if((ui->Gradient_equalizer_checkBox->isChecked()) && (processed_image.channels()==1))
         {
-            //processed_image = Light_gradient_equalizer(processed_image);
+            processed_image = Light_gradient_equalizer(processed_image);
         }
 
         if(ui->Morphological_gradient_equalizer_checkBox->isChecked() && processed_image.channels()==1)
         {
-            //processed_image = Morpological_light_gradient_equalizer(processed_image);
+            processed_image = Morpological_light_gradient_equalizer(processed_image);
 
         }
 
         if(ui->Morphological_sharpen_checkBox->isChecked() && processed_image.channels()==1)
         {
-            //processed_image = Morpological_contrast_enhancement(processed_image);
+            processed_image = Morpological_contrast_enhancement(processed_image);
         }
         //thresholding
         switch(thresh_met)
@@ -145,11 +149,12 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
                                            ui->Otsu_in_edge_checkBox->isChecked(),(double)ui->Scharr_weight_dx_horizontalSlider->value()/100
                                            ,(double)ui->Scharr_weight_dy_horizontalSlider->value()/100);
             break;
+        case LAPLACIAN:
+            Segmented_image = Local_Laplace(processed_image,Laplacian_numberofSubImages,Laplacian_kernel_size,Laplacian_hist_percentile);
+            /*cv::Laplacian(processed_image,Segmented_image,CV_32F,3,1,0,cv::BORDER_REPLICATE);
+            Segmented_image.convertTo(Segmented_image,CV_8U);*/
+            break;
         case OTSU:
-            if(ui->Gradient_equalizer_checkBox->isChecked())
-            {
-
-            }
             Segmented_image = Local_Otsu(processed_image,Local_Otsu_numberofSubImages);
             break;
         case THRESHOLDING:
@@ -223,6 +228,13 @@ void MainWindow::on_Scharr_clicked()
 
 }
 
+void MainWindow::on_Laplacian_clicked()
+{
+    thresh_met = LAPLACIAN;
+    hide_all_seg_boxes();
+    ui->Laplacian_box->show();
+}
+
 void MainWindow::on_Otsu_clicked()
 {
     thresh_met = OTSU;
@@ -256,6 +268,12 @@ void MainWindow::on_Local_Scharr_horizontalSlider_valueChanged(int value)
     ui->Local_Scharr_lcdNumber->display(value*value);
 }
 
+void MainWindow::on_Laplacian_sub_image_horizontalSlider_valueChanged(int value)
+{
+    Laplacian_numberofSubImages = value;
+    ui->Laplacian_sub_image_cdNumber->display(value*value);
+}
+
 void MainWindow::on_Local_Otsu_horizontalSlider_valueChanged(int value)
 {
     Local_Otsu_numberofSubImages = value;
@@ -275,6 +293,11 @@ void MainWindow::on_Local_Sobel_histogram_slider_valueChanged(int value)
 void MainWindow::on_Local_Scharr_histogram_slider_valueChanged(int value)
 {
     Local_Scharr_hist_percentile = value;
+}
+
+void MainWindow::on_Laplacian_histogram_slider_valueChanged(int value)
+{
+    Laplacian_hist_percentile = value;
 }
 
 void MainWindow::on_Threshold_slider_valueChanged(int value)
@@ -399,6 +422,14 @@ void MainWindow::on_Local_Sobel_kernel_slider_valueChanged(int value)
     }
 }
 
+void MainWindow::on_Laplacian_kernel_slider_valueChanged(int value)
+{
+    if(value % 2)
+    {
+        Laplacian_kernel_size = value;
+        ui->Laplacian_kernel_lcdNumber->display(value);
+    }
+}
 
 void MainWindow::on_Adaptive_Thresholding_kernel_slider_valueChanged(int value)
 {

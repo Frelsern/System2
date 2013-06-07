@@ -22,6 +22,8 @@ cv::Mat Local_Sobel(cv::Mat input_img,int sub_images,int kernel_size,int histogr
 cv::Mat Global_Scharr(cv::Mat input_img,int histogram_percentile, bool dx_checked,bool dy_checked,bool Otsu);
 cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, bool dx_checked,bool dy_checked,bool Otsu,double x_weight, double y_weight);
 
+cv::Mat Local_Laplace(cv::Mat input_img,int sub_images,int kernel_size,int histogram_percentile);
+
 cv::Mat Global_Otsu(cv::Mat input_img);
 cv::Mat Local_Otsu(cv::Mat input_img, int sub_images);
 cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat image);

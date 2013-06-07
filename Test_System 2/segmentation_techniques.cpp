@@ -457,6 +457,129 @@ cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, 
     return output_img;
 }
 
+cv::Mat Local_Laplace(cv::Mat input_img,int sub_images,int kernel_size,int histogram_percentile)
+{
+    cv::Mat output_img;
+    if((input_img.channels()==1) && (!input_img.empty()))
+    {
+        int colsize = input_img.cols;
+        int rowsize = input_img.rows;
+
+        cv::Mat sub_image,sub_output_img,sub_image2, sub_image_dx,sub_image_dy,edge_img;
+        sub_image.create(rowsize/sub_images,colsize/sub_images,CV_32F);
+        sub_image2.create(rowsize/sub_images,colsize/sub_images,CV_32F);
+        sub_image_dx.create(rowsize/sub_images,colsize/sub_images,CV_32F);
+        sub_image_dy.create(rowsize/sub_images,colsize/sub_images,CV_32F);
+        edge_img.create(rowsize,colsize,CV_8U);
+        input_img.convertTo(input_img,CV_32F);
+
+        int c,d,e,f;
+       /* for(int a = 0;a<sub_images;a++)
+        {
+            if(a == 0)
+            {
+                c=0;
+                d = floor(1.0*rowsize/sub_images)-1;
+            }else
+            {
+                c = d+1;
+                d = d+floor(1.0*rowsize/sub_images);
+            }
+
+            for(int b = 0;b<sub_images;b++)
+            {
+                if(b == 0)
+                {
+                    e=0;
+                    f = floor(1.0*colsize/sub_images)-1;
+                }else
+                {
+                    e = f+1;
+                    f = f+floor(1.0*colsize/sub_images);
+                }
+
+                sub_image = input_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+                sub_output_img = edge_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+                cv::Laplacian(sub_image2,sub_output_img,CV_32F,kernel_size,1,0,cv::BORDER_REPLICATE);
+               //       cv::Sobel(sub_image2,sub_output_img,CV_32F,dx,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
+
+
+
+            }
+        }
+
+        if(((rowsize-1)-d)>0)//adds missing rows
+        {
+             sub_image.create((rowsize-1)-d,colsize/sub_images,CV_8U);
+             c = d+1;
+             for(int b = 0;b<sub_images;b++)
+             {
+                 if(b == 0)
+                 {
+                     e=0;
+                     f = floor(1.0*colsize/sub_images)-1;
+                 }else
+                 {
+                     e = f+1;
+                     f = f+floor(1.0*colsize/sub_images);
+                 }
+                 sub_image = input_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+                 sub_output_img = edge_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+                 cv::Laplacian(sub_image2,sub_output_img,CV_32F,kernel_size,1,0,cv::BORDER_REPLICATE);
+                  //   cv::Sobel(sub_image2,sub_output_img,CV_32F,dx,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
+
+
+             }
+
+         }
+         if(((colsize-1)-d)>0)//adds missing coloumns
+         {
+             sub_image.create(rowsize/sub_images,(colsize-1)-f,CV_8U);
+
+             e = f+1;
+             for(int a = 0;a<sub_images;a++)
+             {
+                 if(a == 0)
+                 {
+                     c=0;
+                     d = floor(1.0*rowsize/sub_images)-1;
+                 }else
+                 {
+                     c = d+1;
+                     d = d+floor(1.0*rowsize/sub_images);
+                 }
+
+                 sub_image = input_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+                 sub_output_img = edge_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+                 cv::Laplacian(sub_image2,sub_output_img,CV_32F,kernel_size,1,0,cv::BORDER_REPLICATE);
+
+                  //   cv::Sobel(sub_image2,sub_output_img,CV_32F,dx,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
+
+             }
+
+         }
+         if((((colsize-1)-d)>0) && (((rowsize-1)-d)>0))
+         {
+             sub_image.create((rowsize-1)-d,(colsize-1)-f,CV_8U);
+             c = d+1;
+             e = f+1;
+             sub_image = input_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+             sub_output_img = edge_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+             cv::Laplacian(sub_image2,sub_output_img,CV_32F,kernel_size,1,0,cv::BORDER_REPLICATE);
+                // cv::Sobel(sub_image2,sub_output_img,CV_32F,dx,dy,kernel_size,1,0,cv::BORDER_REPLICATE);
+         }*/
+
+        cv::Laplacian(input_img,edge_img,CV_32F,kernel_size,1,0,cv::BORDER_REPLICATE);
+         edge_img.convertTo(edge_img,CV_8U);
+
+
+
+        output_img = Histogram_seg(histogram_percentile,edge_img);
+    }
+    return output_img;
+
+}
+
 cv::Mat Global_Otsu(cv::Mat input_img)
 {
     cv::Mat output_img;

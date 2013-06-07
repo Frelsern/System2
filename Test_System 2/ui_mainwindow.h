@@ -172,6 +172,22 @@ public:
     QHBoxLayout *horizontalLayout_17;
     QSlider *Sobel_weight_dx_horizontalSlider;
     QLCDNumber *Sobel_weight_dx_lcdNumber;
+    QGroupBox *Laplacian_box;
+    QGroupBox *Laplacian_sub_images_groupBox;
+    QWidget *layoutWidget_3;
+    QHBoxLayout *horizontalLayout_10;
+    QSlider *Laplacian_sub_image_horizontalSlider;
+    QLCDNumber *Laplacian_sub_image_cdNumber;
+    QGroupBox *Laplacian_Histogram;
+    QWidget *layoutWidget_11;
+    QHBoxLayout *horizontalLayout_18;
+    QSlider *Laplacian_histogram_slider;
+    QLCDNumber *Laplacian_histogram_lcdNumber;
+    QGroupBox *Laplacian_Kernel_size_box;
+    QWidget *layoutWidget_20;
+    QHBoxLayout *horizontalLayout_27;
+    QSlider *Laplacian_kernel_slider;
+    QLCDNumber *Laplacian_kernel_lcdNumber;
     QPushButton *Capture_clean_net_pushButton;
     QGroupBox *Input_Source_groupBox;
     QWidget *layoutWidget8;
@@ -182,6 +198,7 @@ public:
     QCheckBox *Gradient_equalizer_checkBox;
     QCheckBox *Morphological_gradient_equalizer_checkBox;
     QCheckBox *Morphological_sharpen_checkBox;
+    QRadioButton *Laplacian;
     QMenuBar *menuBar;
     QMenu *menuFile;
 
@@ -872,6 +889,88 @@ public:
 
         horizontalLayout_17->addWidget(Sobel_weight_dx_lcdNumber);
 
+        Laplacian_box = new QGroupBox(Bottom_line_box);
+        Laplacian_box->setObjectName(QStringLiteral("Laplacian_box"));
+        Laplacian_box->setGeometry(QRect(300, 20, 693, 100));
+        Laplacian_sub_images_groupBox = new QGroupBox(Laplacian_box);
+        Laplacian_sub_images_groupBox->setObjectName(QStringLiteral("Laplacian_sub_images_groupBox"));
+        Laplacian_sub_images_groupBox->setGeometry(QRect(0, 30, 170, 45));
+        layoutWidget_3 = new QWidget(Laplacian_sub_images_groupBox);
+        layoutWidget_3->setObjectName(QStringLiteral("layoutWidget_3"));
+        layoutWidget_3->setGeometry(QRect(4, 12, 156, 25));
+        horizontalLayout_10 = new QHBoxLayout(layoutWidget_3);
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        horizontalLayout_10->setContentsMargins(0, 0, 0, 0);
+        Laplacian_sub_image_horizontalSlider = new QSlider(layoutWidget_3);
+        Laplacian_sub_image_horizontalSlider->setObjectName(QStringLiteral("Laplacian_sub_image_horizontalSlider"));
+        Laplacian_sub_image_horizontalSlider->setMinimum(1);
+        Laplacian_sub_image_horizontalSlider->setMaximum(40);
+        Laplacian_sub_image_horizontalSlider->setValue(1);
+        Laplacian_sub_image_horizontalSlider->setSliderPosition(1);
+        Laplacian_sub_image_horizontalSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_10->addWidget(Laplacian_sub_image_horizontalSlider);
+
+        Laplacian_sub_image_cdNumber = new QLCDNumber(layoutWidget_3);
+        Laplacian_sub_image_cdNumber->setObjectName(QStringLiteral("Laplacian_sub_image_cdNumber"));
+        Laplacian_sub_image_cdNumber->setProperty("intValue", QVariant(1));
+
+        horizontalLayout_10->addWidget(Laplacian_sub_image_cdNumber);
+
+        Laplacian_Histogram = new QGroupBox(Laplacian_box);
+        Laplacian_Histogram->setObjectName(QStringLiteral("Laplacian_Histogram"));
+        Laplacian_Histogram->setGeometry(QRect(344, 16, 170, 41));
+        layoutWidget_11 = new QWidget(Laplacian_Histogram);
+        layoutWidget_11->setObjectName(QStringLiteral("layoutWidget_11"));
+        layoutWidget_11->setGeometry(QRect(4, 12, 156, 25));
+        horizontalLayout_18 = new QHBoxLayout(layoutWidget_11);
+        horizontalLayout_18->setSpacing(6);
+        horizontalLayout_18->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_18->setObjectName(QStringLiteral("horizontalLayout_18"));
+        horizontalLayout_18->setContentsMargins(0, 0, 0, 0);
+        Laplacian_histogram_slider = new QSlider(layoutWidget_11);
+        Laplacian_histogram_slider->setObjectName(QStringLiteral("Laplacian_histogram_slider"));
+        Laplacian_histogram_slider->setMinimum(40);
+        Laplacian_histogram_slider->setMaximum(99);
+        Laplacian_histogram_slider->setSliderPosition(70);
+        Laplacian_histogram_slider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_18->addWidget(Laplacian_histogram_slider);
+
+        Laplacian_histogram_lcdNumber = new QLCDNumber(layoutWidget_11);
+        Laplacian_histogram_lcdNumber->setObjectName(QStringLiteral("Laplacian_histogram_lcdNumber"));
+        Laplacian_histogram_lcdNumber->setProperty("intValue", QVariant(70));
+
+        horizontalLayout_18->addWidget(Laplacian_histogram_lcdNumber);
+
+        Laplacian_Kernel_size_box = new QGroupBox(Laplacian_box);
+        Laplacian_Kernel_size_box->setObjectName(QStringLiteral("Laplacian_Kernel_size_box"));
+        Laplacian_Kernel_size_box->setGeometry(QRect(344, 56, 170, 37));
+        layoutWidget_20 = new QWidget(Laplacian_Kernel_size_box);
+        layoutWidget_20->setObjectName(QStringLiteral("layoutWidget_20"));
+        layoutWidget_20->setGeometry(QRect(4, 12, 156, 25));
+        horizontalLayout_27 = new QHBoxLayout(layoutWidget_20);
+        horizontalLayout_27->setSpacing(6);
+        horizontalLayout_27->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_27->setObjectName(QStringLiteral("horizontalLayout_27"));
+        horizontalLayout_27->setContentsMargins(0, 0, 0, 0);
+        Laplacian_kernel_slider = new QSlider(layoutWidget_20);
+        Laplacian_kernel_slider->setObjectName(QStringLiteral("Laplacian_kernel_slider"));
+        Laplacian_kernel_slider->setMinimum(1);
+        Laplacian_kernel_slider->setMaximum(7);
+        Laplacian_kernel_slider->setSliderPosition(3);
+        Laplacian_kernel_slider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_27->addWidget(Laplacian_kernel_slider);
+
+        Laplacian_kernel_lcdNumber = new QLCDNumber(layoutWidget_20);
+        Laplacian_kernel_lcdNumber->setObjectName(QStringLiteral("Laplacian_kernel_lcdNumber"));
+        Laplacian_kernel_lcdNumber->setProperty("intValue", QVariant(3));
+
+        horizontalLayout_27->addWidget(Laplacian_kernel_lcdNumber);
+
         Capture_clean_net_pushButton = new QPushButton(centralWidget);
         Capture_clean_net_pushButton->setObjectName(QStringLiteral("Capture_clean_net_pushButton"));
         Capture_clean_net_pushButton->setGeometry(QRect(1140, 16, 97, 23));
@@ -911,6 +1010,10 @@ public:
         Morphological_sharpen_checkBox = new QCheckBox(centralWidget);
         Morphological_sharpen_checkBox->setObjectName(QStringLiteral("Morphological_sharpen_checkBox"));
         Morphological_sharpen_checkBox->setGeometry(QRect(1044, 60, 137, 17));
+        Laplacian = new QRadioButton(centralWidget);
+        Laplacian->setObjectName(QStringLiteral("Laplacian"));
+        Laplacian->setGeometry(QRect(1192, 60, 65, 17));
+        Laplacian->setChecked(true);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -935,6 +1038,7 @@ public:
         QObject::connect(Scharr_weight_dy_horizontalSlider, SIGNAL(valueChanged(int)), Local_Scharr_weight_dy_lcdNumber, SLOT(display(int)));
         QObject::connect(Sobel_weight_dx_horizontalSlider, SIGNAL(valueChanged(int)), Sobel_weight_dx_lcdNumber, SLOT(display(int)));
         QObject::connect(Sobel_weight_dy_horizontalSlider, SIGNAL(valueChanged(int)), Sobel_weight_dy_lcdNumber, SLOT(display(int)));
+        QObject::connect(Laplacian_histogram_slider, SIGNAL(valueChanged(int)), Laplacian_histogram_lcdNumber, SLOT(display(int)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -1008,6 +1112,10 @@ public:
         Local_Sobel_Kernel_size_box->setTitle(QApplication::translate("MainWindow", "Kernel Size", 0));
         Sobel_weight_dy_groupBox->setTitle(QApplication::translate("MainWindow", "Weighting of dy", 0));
         Sobel_weight_dx_groupBox->setTitle(QApplication::translate("MainWindow", "Weighting of dx", 0));
+        Laplacian_box->setTitle(QApplication::translate("MainWindow", "Laplacian", 0));
+        Laplacian_sub_images_groupBox->setTitle(QApplication::translate("MainWindow", "Number of sub-images", 0));
+        Laplacian_Histogram->setTitle(QApplication::translate("MainWindow", "Histogram percentile", 0));
+        Laplacian_Kernel_size_box->setTitle(QApplication::translate("MainWindow", "Kernel Size", 0));
         Capture_clean_net_pushButton->setText(QApplication::translate("MainWindow", "Capture clean net", 0));
         Input_Source_groupBox->setTitle(QApplication::translate("MainWindow", "Input Source", 0));
         Webcam_source_radioButton->setText(QApplication::translate("MainWindow", "WebCam", 0));
@@ -1016,6 +1124,7 @@ public:
         Gradient_equalizer_checkBox->setText(QApplication::translate("MainWindow", "Light gradient equalizer", 0));
         Morphological_gradient_equalizer_checkBox->setText(QApplication::translate("MainWindow", "Morphological light gradient equalizer", 0));
         Morphological_sharpen_checkBox->setText(QApplication::translate("MainWindow", "Morphological sharpen", 0));
+        Laplacian->setText(QApplication::translate("MainWindow", "Laplacian", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 

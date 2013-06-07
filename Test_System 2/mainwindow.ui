@@ -1413,6 +1413,166 @@ Edge Segmentation
       </widget>
      </widget>
     </widget>
+    <widget class="QGroupBox" name="Laplacian_box">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>20</y>
+       <width>693</width>
+       <height>100</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>Laplacian</string>
+     </property>
+     <widget class="QGroupBox" name="Laplacian_sub_images_groupBox">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>30</y>
+        <width>170</width>
+        <height>45</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Number of sub-images</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_3">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>12</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_10">
+        <item>
+         <widget class="QSlider" name="Laplacian_sub_image_horizontalSlider">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>40</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+          <property name="sliderPosition">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Laplacian_sub_image_cdNumber">
+          <property name="intValue" stdset="0">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="Laplacian_Histogram">
+      <property name="geometry">
+       <rect>
+        <x>344</x>
+        <y>16</y>
+        <width>170</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Histogram percentile</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_11">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>12</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_18">
+        <item>
+         <widget class="QSlider" name="Laplacian_histogram_slider">
+          <property name="minimum">
+           <number>40</number>
+          </property>
+          <property name="maximum">
+           <number>99</number>
+          </property>
+          <property name="sliderPosition">
+           <number>70</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Laplacian_histogram_lcdNumber">
+          <property name="intValue" stdset="0">
+           <number>70</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="Laplacian_Kernel_size_box">
+      <property name="geometry">
+       <rect>
+        <x>344</x>
+        <y>56</y>
+        <width>170</width>
+        <height>37</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Kernel Size</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_20">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>12</y>
+         <width>156</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_27">
+        <item>
+         <widget class="QSlider" name="Laplacian_kernel_slider">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>7</number>
+          </property>
+          <property name="sliderPosition">
+           <number>3</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLCDNumber" name="Laplacian_kernel_lcdNumber">
+          <property name="intValue" stdset="0">
+           <number>3</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
    </widget>
    <widget class="QPushButton" name="Capture_clean_net_pushButton">
     <property name="geometry">
@@ -1515,6 +1675,22 @@ Edge Segmentation
      <string>Morphological sharpen</string>
     </property>
    </widget>
+   <widget class="QRadioButton" name="Laplacian">
+    <property name="geometry">
+     <rect>
+      <x>1192</x>
+      <y>60</y>
+      <width>65</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Laplacian</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -1571,12 +1747,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>630</x>
-     <y>166</y>
+     <x>654</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
-     <x>782</x>
-     <y>168</y>
+     <x>807</x>
+     <y>270</y>
     </hint>
    </hints>
   </connection>
@@ -1619,12 +1795,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>534</x>
-     <y>166</y>
+     <x>535</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
-     <x>610</x>
-     <y>168</y>
+     <x>635</x>
+     <y>270</y>
     </hint>
    </hints>
   </connection>
@@ -1635,12 +1811,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>533</x>
-     <y>206</y>
+     <x>534</x>
+     <y>312</y>
     </hint>
     <hint type="destinationlabel">
-     <x>610</x>
-     <y>208</y>
+     <x>635</x>
+     <y>310</y>
     </hint>
    </hints>
   </connection>
@@ -1699,12 +1875,12 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>879</x>
-     <y>156</y>
+     <x>880</x>
+     <y>272</y>
     </hint>
     <hint type="destinationlabel">
-     <x>900</x>
-     <y>156</y>
+     <x>983</x>
+     <y>270</y>
     </hint>
    </hints>
   </connection>
@@ -1715,12 +1891,28 @@ Edge Segmentation
    <slot>display(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>879</x>
-     <y>196</y>
+     <x>880</x>
+     <y>316</y>
     </hint>
     <hint type="destinationlabel">
-     <x>901</x>
-     <y>199</y>
+     <x>983</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Laplacian_histogram_slider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>Laplacian_histogram_lcdNumber</receiver>
+   <slot>display(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>727</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>741</x>
+     <y>165</y>
     </hint>
    </hints>
   </connection>

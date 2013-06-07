@@ -24,7 +24,7 @@ class MainWindow;
 
 enum Color_Space { COLOR_NONE=0,X,Y,LUMINANCE,RED,GREEN,BLUE,
                     X2,Y2,LUMINANCE2,LAB,L,A,B};
-enum Thresholding_Method {NO_THRESH_MODE=0,SOBEL,SCHARR,OTSU,THRESHOLDING,ADAPTIVE_THRESHOLDING};
+enum Thresholding_Method {NO_THRESH_MODE=0,SOBEL,SCHARR,LAPLACIAN,OTSU,THRESHOLDING,ADAPTIVE_THRESHOLDING};
 enum Mode { NO_MODE=0,HOLE_DETECTION,GROWTH_DETECTION };
 
 
@@ -57,6 +57,10 @@ private slots:
 
     void on_Local_Scharr_horizontalSlider_valueChanged(int value);
 
+    void on_Laplacian_clicked();
+
+    void on_Laplacian_sub_image_horizontalSlider_valueChanged(int value);
+
     void on_Otsu_clicked();
 
     void on_Local_Otsu_horizontalSlider_valueChanged(int value);
@@ -66,6 +70,8 @@ private slots:
     void on_Local_Sobel_histogram_slider_valueChanged(int value);
 
     void on_Local_Scharr_histogram_slider_valueChanged(int value);
+
+    void on_Laplacian_histogram_slider_valueChanged(int value);
 
     void on_Thresholding_clicked();
 
@@ -115,6 +121,8 @@ private slots:
 
     void on_Local_Sobel_kernel_slider_valueChanged(int value);
 
+    void on_Laplacian_kernel_slider_valueChanged(int value);
+
     void on_Adaptive_Thresholding_kernel_slider_valueChanged(int value);
 
     void on_Adaptive_Thresholding_C_slider_valueChanged(int value);
@@ -152,6 +160,9 @@ private:
     int Local_Sobel_dx;
     int Local_Sobel_dy;
     int Local_Sobel_kernel_size;
+    int Laplacian_numberofSubImages;
+    int Laplacian_hist_percentile;
+    int Laplacian_kernel_size;
     int Local_Scharr_numberofSubImages;
     int Local_Scharr_hist_percentile;
     int Local_Otsu_numberofSubImages;
