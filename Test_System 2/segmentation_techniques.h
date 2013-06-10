@@ -26,7 +26,7 @@ cv::Mat Local_Laplace(cv::Mat input_img,int sub_images,int kernel_size,int histo
 
 cv::Mat Global_Otsu(cv::Mat input_img);
 cv::Mat Local_Otsu(cv::Mat input_img, int sub_images);
-cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat image);
+cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat sub_image,cv::Mat output_image);
 
 cv::Mat Naive_Thresholding(cv::Mat input_img,int threshold);
 cv::Mat Adaptive_Thresholding(cv::Mat input_img,int kernel_size,int C,bool Gaussian);

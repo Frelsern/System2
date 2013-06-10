@@ -602,7 +602,7 @@ cv::Mat Local_Otsu(cv::Mat input_img, int sub_images)
         int colsize = output_img.cols;
         int rowsize = output_img.rows;
 
-        cv::Mat sub_image,sub_image2,sub_image3;
+        cv::Mat sub_image,sub_image2,sub_image3,output_sub_image;
         sub_image.create(rowsize/sub_images,colsize/sub_images,CV_8U);
         sub_image2.create(rowsize/sub_images,colsize/sub_images,CV_8U);
         sub_image3.create(rowsize/sub_images,colsize/sub_images,CV_8U);
@@ -630,11 +630,29 @@ cv::Mat Local_Otsu(cv::Mat input_img, int sub_images)
                     e = f+1;
                     f = f+floor(1.0*colsize/sub_images);
                 }
-                sub_image = output_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
-                sub_image.copyTo(sub_image2);
-                cv::threshold(sub_image2,sub_image,0,255,cv::THRESH_BINARY | cv::THRESH_OTSU);
-                sub_image3 =  Local_Otsu_neighbourhood(e, c,floor(1.0*colsize/sub_images),  floor(1.0*rowsize/sub_images),output_img);
-                sub_image3.copyTo(sub_image);
+                if(c==0)//top row
+                {
+                    sub_image = input_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+                    output_sub_image = output_img(cv::Rect(e,c,sub_image.cols,sub_image.rows));
+                    sub_image.copyTo(sub_image2);
+                    cv::threshold(sub_image2,sub_image2,0,255,cv::THRESH_BINARY | cv::THRESH_OTSU);
+
+                    sub_image2.copyTo(sub_image3);
+                    //sub_image3 =  Local_Otsu_neighbourhood(e, c,floor(1.0*colsize/sub_images),  floor(1.0*rowsize/sub_images),sub_image2,output_img);
+                    sub_image3.copyTo(output_sub_image);
+                }
+                else
+                {
+                    sub_image.create((rowsize/sub_images)+5,sub_image.cols,sub_image.type());
+                    //qDebug() << c-5 << sub_image.rows << e << sub_image.cols;
+                    sub_image = input_img(cv::Rect(e,c-5,sub_image.cols,sub_image.rows));
+                    output_sub_image = output_img(cv::Rect(e,c-5,sub_image.cols,sub_image.rows));
+                    sub_image.copyTo(sub_image2);
+                    cv::threshold(sub_image2,sub_image2,0,255,cv::THRESH_BINARY | cv::THRESH_OTSU);
+                    sub_image3 =  Local_Otsu_neighbourhood(e, c,floor(1.0*colsize/sub_images),  floor(1.0*rowsize/sub_images),sub_image2,output_img);
+                    sub_image3.copyTo(output_sub_image);
+                }
+
             }
         }
        if(((rowsize-1)-d)>0)//adds missing rows
@@ -694,58 +712,58 @@ cv::Mat Local_Otsu(cv::Mat input_img, int sub_images)
     return output_img;
 }
 
-cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat image)
+//checks a 5 row big overlapping region between two segmentation results of sub-images
+//where one image is below the other.
+//inverts the new result if the sub-images differ too much in the overlapping region
+cv::Mat Local_Otsu_neighbourhood(int x, int y,int width, int height,cv::Mat sub_image,cv::Mat output_image)
 {
-    cv::Mat last_sub,new_sub,last_sub_image,new_sub_image;
-    if(y>0)
+    cv::Mat last_sub,last_sub_image,output_sub_image,new_sub_image,new_sub;
+    if(y>0)//not top row
     {
-        //topprad mot bunnrad
-        last_sub_image = image(cv::Rect(x,y-1,width,1));
-        new_sub_image = image(cv::Rect(x,y,width,height));
+        last_sub_image = output_image(cv::Rect(x,y-5,width,5));
+        //new_sub_image = output_image(cv::Rect(x,y,width,height));
         last_sub_image.copyTo(last_sub);
-        new_sub_image.copyTo(new_sub);
+        //new_sub_image.copyTo(new_sub);
 
         int counter=0;
-        bool picture = true;
-        uchar* new_sub_ptr = new_sub.ptr<uchar>(0);
+        uchar* sub_ptr = sub_image.ptr<uchar>(0);
         uchar* last_sub_ptr = last_sub.ptr<uchar>(0);
-        for(int i = 0;i<width;i++)
+
+
+        for(int i = 0;i<5*width;i++)
         {
-            if(new_sub_ptr[i] != last_sub_ptr[i])
+            if(sub_ptr[i] != last_sub_ptr[i])
             {
+
                 counter +=1;
             }
-            //counter = width;
         }
-        if(counter>(2*width/3))
+        if(counter>(2*5*width/3))//2/3 of the pixels are wrong
         {
-            uchar* sub_image_ptr = new_sub.ptr<uchar>(0);
-            for(int i = 0;i<(width*height);i++)
+
+            //qDebug() << x << y << counter << width*5 << sub_ptr[50] << last_sub_ptr[50];
+            uchar* sub_image_ptr = sub_image.ptr<uchar>(0);
+            imwrite("before.png", sub_image );
+            for(int i = 0;i<(width*(5+height));i++)
             {
                 sub_image_ptr[i] = 255-sub_image_ptr[i];
+                //sub_image_ptr[i] = 0;
 
             }
-            if(picture==true)//remove
-            {
-                picture = false;
-                imwrite(("new_sub.png"), new_sub );
-                imwrite(("new_sub.png"), new_sub );
-            }
-            new_sub.copyTo(new_sub_image);
+            imwrite("after.png", sub_image );
+
+            //sub_image.copyTo(output_sub_image);
 
         }
 
+        sub_image.copyTo(output_sub_image);
 
-
-
-
-        //venstre mot høyre
     }
     else
     {
-        new_sub_image = image(cv::Rect(x,y,width,height));
+        output_sub_image = output_image(cv::Rect(x,y,width,height));
     }
-    return new_sub_image;
+    return output_sub_image;
 }
 
 cv::Mat Naive_Thresholding(cv::Mat input_img, int threshold)
