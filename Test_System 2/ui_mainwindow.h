@@ -113,32 +113,9 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QSlider *Local_Otsu_horizontalSlider;
     QLCDNumber *Local_Otsu_lcdNumber;
-    QGroupBox *Local_Scharr_box;
-    QGroupBox *Local_Scharr_Histogram;
-    QWidget *layoutWidget6;
-    QHBoxLayout *horizontalLayout_5;
-    QSlider *Local_Scharr_histogram_slider;
-    QLCDNumber *Local_Scharr_histogram_lcdNumber;
-    QGroupBox *groupBox_2;
-    QWidget *layoutWidget_2;
-    QHBoxLayout *horizontalLayout_4;
-    QSlider *Local_Scharr_horizontalSlider;
-    QLCDNumber *Local_Scharr_lcdNumber;
-    QCheckBox *Local_Scharr_dy_checkBox;
-    QCheckBox *Local_Scharr_dx_checkBox;
-    QGroupBox *Scharr_weight_dx_groupBox;
-    QWidget *layoutWidget_6;
-    QHBoxLayout *horizontalLayout_7;
-    QSlider *Scharr_weight_dx_horizontalSlider;
-    QLCDNumber *Local_Scharr_weight_dx_lcdNumber;
-    QGroupBox *Scharr_weight_dy_groupBox;
-    QWidget *layoutWidget_7;
-    QHBoxLayout *horizontalLayout_14;
-    QSlider *Scharr_weight_dy_horizontalSlider;
-    QLCDNumber *Local_Scharr_weight_dy_lcdNumber;
     QGroupBox *Sobel_box;
     QGroupBox *Local_Sobel_sub_images_groupBox;
-    QWidget *layoutWidget7;
+    QWidget *layoutWidget6;
     QHBoxLayout *horizontalLayout_3;
     QSlider *Local_Sobel_horizontalSlider;
     QLCDNumber *Local_Sobel_lcdNumber;
@@ -188,9 +165,39 @@ public:
     QHBoxLayout *horizontalLayout_27;
     QSlider *Laplacian_kernel_slider;
     QLCDNumber *Laplacian_kernel_lcdNumber;
+    QGroupBox *Local_Scharr_box;
+    QGroupBox *Local_Scharr_Histogram;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout_19;
+    QCheckBox *Scharr_histogram_percentile_checkBox;
+    QSlider *Local_Scharr_histogram_slider;
+    QLCDNumber *Local_Scharr_histogram_lcdNumber;
+    QGroupBox *groupBox_2;
+    QWidget *layoutWidget_2;
+    QHBoxLayout *horizontalLayout_4;
+    QSlider *Local_Scharr_horizontalSlider;
+    QLCDNumber *Local_Scharr_lcdNumber;
+    QCheckBox *Local_Scharr_dy_checkBox;
+    QCheckBox *Local_Scharr_dx_checkBox;
+    QGroupBox *Scharr_weight_dx_groupBox;
+    QWidget *layoutWidget_6;
+    QHBoxLayout *horizontalLayout_7;
+    QSlider *Scharr_weight_dx_horizontalSlider;
+    QLCDNumber *Local_Scharr_weight_dx_lcdNumber;
+    QGroupBox *Scharr_weight_dy_groupBox;
+    QWidget *layoutWidget_7;
+    QHBoxLayout *horizontalLayout_14;
+    QSlider *Scharr_weight_dy_horizontalSlider;
+    QLCDNumber *Local_Scharr_weight_dy_lcdNumber;
+    QGroupBox *Scharr_threshold_box;
+    QWidget *widget1;
+    QHBoxLayout *horizontalLayout_5;
+    QCheckBox *Scharr_threshold_checkBox;
+    QSlider *Scharr_threshold_slider;
+    QLCDNumber *Scharr_threshold_lcdNumber;
     QPushButton *Capture_clean_net_pushButton;
     QGroupBox *Input_Source_groupBox;
-    QWidget *layoutWidget8;
+    QWidget *layoutWidget7;
     QHBoxLayout *horizontalLayout_13;
     QRadioButton *Webcam_source_radioButton;
     QRadioButton *Image_source_radioButton;
@@ -582,137 +589,21 @@ public:
 
         horizontalLayout_2->addWidget(Local_Otsu_lcdNumber);
 
-        Local_Scharr_box = new QGroupBox(Bottom_line_box);
-        Local_Scharr_box->setObjectName(QStringLiteral("Local_Scharr_box"));
-        Local_Scharr_box->setGeometry(QRect(300, 20, 550, 100));
-        Local_Scharr_Histogram = new QGroupBox(Local_Scharr_box);
-        Local_Scharr_Histogram->setObjectName(QStringLiteral("Local_Scharr_Histogram"));
-        Local_Scharr_Histogram->setGeometry(QRect(0, 56, 170, 45));
-        layoutWidget6 = new QWidget(Local_Scharr_Histogram);
-        layoutWidget6->setObjectName(QStringLiteral("layoutWidget6"));
-        layoutWidget6->setGeometry(QRect(4, 12, 156, 25));
-        horizontalLayout_5 = new QHBoxLayout(layoutWidget6);
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
-        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
-        Local_Scharr_histogram_slider = new QSlider(layoutWidget6);
-        Local_Scharr_histogram_slider->setObjectName(QStringLiteral("Local_Scharr_histogram_slider"));
-        Local_Scharr_histogram_slider->setMinimum(60);
-        Local_Scharr_histogram_slider->setMaximum(99);
-        Local_Scharr_histogram_slider->setSliderPosition(90);
-        Local_Scharr_histogram_slider->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_5->addWidget(Local_Scharr_histogram_slider);
-
-        Local_Scharr_histogram_lcdNumber = new QLCDNumber(layoutWidget6);
-        Local_Scharr_histogram_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_histogram_lcdNumber"));
-        Local_Scharr_histogram_lcdNumber->setProperty("intValue", QVariant(90));
-
-        horizontalLayout_5->addWidget(Local_Scharr_histogram_lcdNumber);
-
-        groupBox_2 = new QGroupBox(Local_Scharr_box);
-        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        groupBox_2->setGeometry(QRect(0, 12, 170, 45));
-        layoutWidget_2 = new QWidget(groupBox_2);
-        layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
-        layoutWidget_2->setGeometry(QRect(8, 16, 156, 25));
-        horizontalLayout_4 = new QHBoxLayout(layoutWidget_2);
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
-        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
-        Local_Scharr_horizontalSlider = new QSlider(layoutWidget_2);
-        Local_Scharr_horizontalSlider->setObjectName(QStringLiteral("Local_Scharr_horizontalSlider"));
-        Local_Scharr_horizontalSlider->setMinimum(1);
-        Local_Scharr_horizontalSlider->setMaximum(40);
-        Local_Scharr_horizontalSlider->setValue(5);
-        Local_Scharr_horizontalSlider->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_4->addWidget(Local_Scharr_horizontalSlider);
-
-        Local_Scharr_lcdNumber = new QLCDNumber(layoutWidget_2);
-        Local_Scharr_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_lcdNumber"));
-        Local_Scharr_lcdNumber->setProperty("intValue", QVariant(25));
-
-        horizontalLayout_4->addWidget(Local_Scharr_lcdNumber);
-
-        Local_Scharr_dy_checkBox = new QCheckBox(Local_Scharr_box);
-        Local_Scharr_dy_checkBox->setObjectName(QStringLiteral("Local_Scharr_dy_checkBox"));
-        Local_Scharr_dy_checkBox->setGeometry(QRect(216, 72, 70, 17));
-        Local_Scharr_dx_checkBox = new QCheckBox(Local_Scharr_box);
-        Local_Scharr_dx_checkBox->setObjectName(QStringLiteral("Local_Scharr_dx_checkBox"));
-        Local_Scharr_dx_checkBox->setGeometry(QRect(216, 28, 70, 17));
-        Local_Scharr_dx_checkBox->setChecked(true);
-        Scharr_weight_dx_groupBox = new QGroupBox(Local_Scharr_box);
-        Scharr_weight_dx_groupBox->setObjectName(QStringLiteral("Scharr_weight_dx_groupBox"));
-        Scharr_weight_dx_groupBox->setGeometry(QRect(292, 8, 170, 45));
-        layoutWidget_6 = new QWidget(Scharr_weight_dx_groupBox);
-        layoutWidget_6->setObjectName(QStringLiteral("layoutWidget_6"));
-        layoutWidget_6->setGeometry(QRect(8, 16, 156, 25));
-        horizontalLayout_7 = new QHBoxLayout(layoutWidget_6);
-        horizontalLayout_7->setSpacing(6);
-        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
-        Scharr_weight_dx_horizontalSlider = new QSlider(layoutWidget_6);
-        Scharr_weight_dx_horizontalSlider->setObjectName(QStringLiteral("Scharr_weight_dx_horizontalSlider"));
-        Scharr_weight_dx_horizontalSlider->setMinimum(1);
-        Scharr_weight_dx_horizontalSlider->setMaximum(100);
-        Scharr_weight_dx_horizontalSlider->setValue(50);
-        Scharr_weight_dx_horizontalSlider->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_7->addWidget(Scharr_weight_dx_horizontalSlider);
-
-        Local_Scharr_weight_dx_lcdNumber = new QLCDNumber(layoutWidget_6);
-        Local_Scharr_weight_dx_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_weight_dx_lcdNumber"));
-        Local_Scharr_weight_dx_lcdNumber->setSmallDecimalPoint(false);
-        Local_Scharr_weight_dx_lcdNumber->setProperty("value", QVariant(50));
-        Local_Scharr_weight_dx_lcdNumber->setProperty("intValue", QVariant(50));
-
-        horizontalLayout_7->addWidget(Local_Scharr_weight_dx_lcdNumber);
-
-        Scharr_weight_dy_groupBox = new QGroupBox(Local_Scharr_box);
-        Scharr_weight_dy_groupBox->setObjectName(QStringLiteral("Scharr_weight_dy_groupBox"));
-        Scharr_weight_dy_groupBox->setGeometry(QRect(292, 52, 170, 45));
-        layoutWidget_7 = new QWidget(Scharr_weight_dy_groupBox);
-        layoutWidget_7->setObjectName(QStringLiteral("layoutWidget_7"));
-        layoutWidget_7->setGeometry(QRect(8, 16, 156, 25));
-        horizontalLayout_14 = new QHBoxLayout(layoutWidget_7);
-        horizontalLayout_14->setSpacing(6);
-        horizontalLayout_14->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
-        horizontalLayout_14->setContentsMargins(0, 0, 0, 0);
-        Scharr_weight_dy_horizontalSlider = new QSlider(layoutWidget_7);
-        Scharr_weight_dy_horizontalSlider->setObjectName(QStringLiteral("Scharr_weight_dy_horizontalSlider"));
-        Scharr_weight_dy_horizontalSlider->setMinimum(1);
-        Scharr_weight_dy_horizontalSlider->setMaximum(100);
-        Scharr_weight_dy_horizontalSlider->setValue(50);
-        Scharr_weight_dy_horizontalSlider->setOrientation(Qt::Horizontal);
-
-        horizontalLayout_14->addWidget(Scharr_weight_dy_horizontalSlider);
-
-        Local_Scharr_weight_dy_lcdNumber = new QLCDNumber(layoutWidget_7);
-        Local_Scharr_weight_dy_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_weight_dy_lcdNumber"));
-        Local_Scharr_weight_dy_lcdNumber->setProperty("intValue", QVariant(50));
-
-        horizontalLayout_14->addWidget(Local_Scharr_weight_dy_lcdNumber);
-
         Sobel_box = new QGroupBox(Bottom_line_box);
         Sobel_box->setObjectName(QStringLiteral("Sobel_box"));
         Sobel_box->setGeometry(QRect(300, 20, 693, 100));
         Local_Sobel_sub_images_groupBox = new QGroupBox(Sobel_box);
         Local_Sobel_sub_images_groupBox->setObjectName(QStringLiteral("Local_Sobel_sub_images_groupBox"));
         Local_Sobel_sub_images_groupBox->setGeometry(QRect(0, 30, 170, 45));
-        layoutWidget7 = new QWidget(Local_Sobel_sub_images_groupBox);
-        layoutWidget7->setObjectName(QStringLiteral("layoutWidget7"));
-        layoutWidget7->setGeometry(QRect(4, 12, 156, 25));
-        horizontalLayout_3 = new QHBoxLayout(layoutWidget7);
+        layoutWidget6 = new QWidget(Local_Sobel_sub_images_groupBox);
+        layoutWidget6->setObjectName(QStringLiteral("layoutWidget6"));
+        layoutWidget6->setGeometry(QRect(4, 12, 156, 25));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget6);
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        Local_Sobel_horizontalSlider = new QSlider(layoutWidget7);
+        Local_Sobel_horizontalSlider = new QSlider(layoutWidget6);
         Local_Sobel_horizontalSlider->setObjectName(QStringLiteral("Local_Sobel_horizontalSlider"));
         Local_Sobel_horizontalSlider->setMinimum(1);
         Local_Sobel_horizontalSlider->setMaximum(40);
@@ -722,7 +613,7 @@ public:
 
         horizontalLayout_3->addWidget(Local_Sobel_horizontalSlider);
 
-        Local_Sobel_lcdNumber = new QLCDNumber(layoutWidget7);
+        Local_Sobel_lcdNumber = new QLCDNumber(layoutWidget6);
         Local_Sobel_lcdNumber->setObjectName(QStringLiteral("Local_Sobel_lcdNumber"));
         Local_Sobel_lcdNumber->setProperty("intValue", QVariant(1));
 
@@ -945,6 +836,7 @@ public:
 
         horizontalLayout_18->addWidget(Laplacian_histogram_lcdNumber);
 
+        layoutWidget_11->raise();
         Laplacian_Kernel_size_box = new QGroupBox(Laplacian_box);
         Laplacian_Kernel_size_box->setObjectName(QStringLiteral("Laplacian_Kernel_size_box"));
         Laplacian_Kernel_size_box->setGeometry(QRect(344, 56, 170, 37));
@@ -971,32 +863,185 @@ public:
 
         horizontalLayout_27->addWidget(Laplacian_kernel_lcdNumber);
 
+        Local_Scharr_box = new QGroupBox(Bottom_line_box);
+        Local_Scharr_box->setObjectName(QStringLiteral("Local_Scharr_box"));
+        Local_Scharr_box->setGeometry(QRect(300, 20, 550, 100));
+        Local_Scharr_Histogram = new QGroupBox(Local_Scharr_box);
+        Local_Scharr_Histogram->setObjectName(QStringLiteral("Local_Scharr_Histogram"));
+        Local_Scharr_Histogram->setGeometry(QRect(344, 12, 193, 45));
+        widget = new QWidget(Local_Scharr_Histogram);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setGeometry(QRect(12, 13, 175, 25));
+        horizontalLayout_19 = new QHBoxLayout(widget);
+        horizontalLayout_19->setSpacing(6);
+        horizontalLayout_19->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_19->setObjectName(QStringLiteral("horizontalLayout_19"));
+        horizontalLayout_19->setContentsMargins(0, 0, 0, 0);
+        Scharr_histogram_percentile_checkBox = new QCheckBox(widget);
+        Scharr_histogram_percentile_checkBox->setObjectName(QStringLiteral("Scharr_histogram_percentile_checkBox"));
+
+        horizontalLayout_19->addWidget(Scharr_histogram_percentile_checkBox);
+
+        Local_Scharr_histogram_slider = new QSlider(widget);
+        Local_Scharr_histogram_slider->setObjectName(QStringLiteral("Local_Scharr_histogram_slider"));
+        Local_Scharr_histogram_slider->setMinimum(40);
+        Local_Scharr_histogram_slider->setMaximum(99);
+        Local_Scharr_histogram_slider->setSliderPosition(90);
+        Local_Scharr_histogram_slider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_19->addWidget(Local_Scharr_histogram_slider);
+
+        Local_Scharr_histogram_lcdNumber = new QLCDNumber(widget);
+        Local_Scharr_histogram_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_histogram_lcdNumber"));
+        Local_Scharr_histogram_lcdNumber->setProperty("intValue", QVariant(90));
+
+        horizontalLayout_19->addWidget(Local_Scharr_histogram_lcdNumber);
+
+        groupBox_2 = new QGroupBox(Local_Scharr_box);
+        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
+        groupBox_2->setGeometry(QRect(0, 12, 170, 45));
+        layoutWidget_2 = new QWidget(groupBox_2);
+        layoutWidget_2->setObjectName(QStringLiteral("layoutWidget_2"));
+        layoutWidget_2->setGeometry(QRect(8, 16, 156, 25));
+        horizontalLayout_4 = new QHBoxLayout(layoutWidget_2);
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
+        horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
+        Local_Scharr_horizontalSlider = new QSlider(layoutWidget_2);
+        Local_Scharr_horizontalSlider->setObjectName(QStringLiteral("Local_Scharr_horizontalSlider"));
+        Local_Scharr_horizontalSlider->setMinimum(1);
+        Local_Scharr_horizontalSlider->setMaximum(40);
+        Local_Scharr_horizontalSlider->setValue(5);
+        Local_Scharr_horizontalSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_4->addWidget(Local_Scharr_horizontalSlider);
+
+        Local_Scharr_lcdNumber = new QLCDNumber(layoutWidget_2);
+        Local_Scharr_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_lcdNumber"));
+        Local_Scharr_lcdNumber->setProperty("intValue", QVariant(25));
+
+        horizontalLayout_4->addWidget(Local_Scharr_lcdNumber);
+
+        Local_Scharr_dy_checkBox = new QCheckBox(Local_Scharr_box);
+        Local_Scharr_dy_checkBox->setObjectName(QStringLiteral("Local_Scharr_dy_checkBox"));
+        Local_Scharr_dy_checkBox->setGeometry(QRect(56, 68, 70, 17));
+        Local_Scharr_dy_checkBox->setChecked(true);
+        Local_Scharr_dx_checkBox = new QCheckBox(Local_Scharr_box);
+        Local_Scharr_dx_checkBox->setObjectName(QStringLiteral("Local_Scharr_dx_checkBox"));
+        Local_Scharr_dx_checkBox->setGeometry(QRect(12, 68, 70, 17));
+        Local_Scharr_dx_checkBox->setChecked(true);
+        Scharr_weight_dx_groupBox = new QGroupBox(Local_Scharr_box);
+        Scharr_weight_dx_groupBox->setObjectName(QStringLiteral("Scharr_weight_dx_groupBox"));
+        Scharr_weight_dx_groupBox->setGeometry(QRect(170, 8, 170, 45));
+        layoutWidget_6 = new QWidget(Scharr_weight_dx_groupBox);
+        layoutWidget_6->setObjectName(QStringLiteral("layoutWidget_6"));
+        layoutWidget_6->setGeometry(QRect(8, 16, 156, 25));
+        horizontalLayout_7 = new QHBoxLayout(layoutWidget_6);
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
+        Scharr_weight_dx_horizontalSlider = new QSlider(layoutWidget_6);
+        Scharr_weight_dx_horizontalSlider->setObjectName(QStringLiteral("Scharr_weight_dx_horizontalSlider"));
+        Scharr_weight_dx_horizontalSlider->setMinimum(1);
+        Scharr_weight_dx_horizontalSlider->setMaximum(100);
+        Scharr_weight_dx_horizontalSlider->setValue(50);
+        Scharr_weight_dx_horizontalSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_7->addWidget(Scharr_weight_dx_horizontalSlider);
+
+        Local_Scharr_weight_dx_lcdNumber = new QLCDNumber(layoutWidget_6);
+        Local_Scharr_weight_dx_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_weight_dx_lcdNumber"));
+        Local_Scharr_weight_dx_lcdNumber->setSmallDecimalPoint(false);
+        Local_Scharr_weight_dx_lcdNumber->setProperty("value", QVariant(50));
+        Local_Scharr_weight_dx_lcdNumber->setProperty("intValue", QVariant(50));
+
+        horizontalLayout_7->addWidget(Local_Scharr_weight_dx_lcdNumber);
+
+        Scharr_weight_dy_groupBox = new QGroupBox(Local_Scharr_box);
+        Scharr_weight_dy_groupBox->setObjectName(QStringLiteral("Scharr_weight_dy_groupBox"));
+        Scharr_weight_dy_groupBox->setGeometry(QRect(170, 52, 170, 45));
+        layoutWidget_7 = new QWidget(Scharr_weight_dy_groupBox);
+        layoutWidget_7->setObjectName(QStringLiteral("layoutWidget_7"));
+        layoutWidget_7->setGeometry(QRect(8, 16, 156, 25));
+        horizontalLayout_14 = new QHBoxLayout(layoutWidget_7);
+        horizontalLayout_14->setSpacing(6);
+        horizontalLayout_14->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_14->setObjectName(QStringLiteral("horizontalLayout_14"));
+        horizontalLayout_14->setContentsMargins(0, 0, 0, 0);
+        Scharr_weight_dy_horizontalSlider = new QSlider(layoutWidget_7);
+        Scharr_weight_dy_horizontalSlider->setObjectName(QStringLiteral("Scharr_weight_dy_horizontalSlider"));
+        Scharr_weight_dy_horizontalSlider->setMinimum(1);
+        Scharr_weight_dy_horizontalSlider->setMaximum(100);
+        Scharr_weight_dy_horizontalSlider->setValue(50);
+        Scharr_weight_dy_horizontalSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_14->addWidget(Scharr_weight_dy_horizontalSlider);
+
+        Local_Scharr_weight_dy_lcdNumber = new QLCDNumber(layoutWidget_7);
+        Local_Scharr_weight_dy_lcdNumber->setObjectName(QStringLiteral("Local_Scharr_weight_dy_lcdNumber"));
+        Local_Scharr_weight_dy_lcdNumber->setProperty("intValue", QVariant(50));
+
+        horizontalLayout_14->addWidget(Local_Scharr_weight_dy_lcdNumber);
+
+        Scharr_threshold_box = new QGroupBox(Local_Scharr_box);
+        Scharr_threshold_box->setObjectName(QStringLiteral("Scharr_threshold_box"));
+        Scharr_threshold_box->setGeometry(QRect(344, 56, 193, 45));
+        widget1 = new QWidget(Scharr_threshold_box);
+        widget1->setObjectName(QStringLiteral("widget1"));
+        widget1->setGeometry(QRect(12, 16, 175, 25));
+        horizontalLayout_5 = new QHBoxLayout(widget1);
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout_5->setObjectName(QStringLiteral("horizontalLayout_5"));
+        horizontalLayout_5->setContentsMargins(0, 0, 0, 0);
+        Scharr_threshold_checkBox = new QCheckBox(widget1);
+        Scharr_threshold_checkBox->setObjectName(QStringLiteral("Scharr_threshold_checkBox"));
+
+        horizontalLayout_5->addWidget(Scharr_threshold_checkBox);
+
+        Scharr_threshold_slider = new QSlider(widget1);
+        Scharr_threshold_slider->setObjectName(QStringLiteral("Scharr_threshold_slider"));
+        Scharr_threshold_slider->setMinimum(0);
+        Scharr_threshold_slider->setMaximum(255);
+        Scharr_threshold_slider->setSliderPosition(90);
+        Scharr_threshold_slider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout_5->addWidget(Scharr_threshold_slider);
+
+        Scharr_threshold_lcdNumber = new QLCDNumber(widget1);
+        Scharr_threshold_lcdNumber->setObjectName(QStringLiteral("Scharr_threshold_lcdNumber"));
+        Scharr_threshold_lcdNumber->setProperty("intValue", QVariant(90));
+
+        horizontalLayout_5->addWidget(Scharr_threshold_lcdNumber);
+
         Capture_clean_net_pushButton = new QPushButton(centralWidget);
         Capture_clean_net_pushButton->setObjectName(QStringLiteral("Capture_clean_net_pushButton"));
         Capture_clean_net_pushButton->setGeometry(QRect(1140, 16, 97, 23));
         Input_Source_groupBox = new QGroupBox(centralWidget);
         Input_Source_groupBox->setObjectName(QStringLiteral("Input_Source_groupBox"));
         Input_Source_groupBox->setGeometry(QRect(0, 0, 201, 45));
-        layoutWidget8 = new QWidget(Input_Source_groupBox);
-        layoutWidget8->setObjectName(QStringLiteral("layoutWidget8"));
-        layoutWidget8->setGeometry(QRect(10, 20, 182, 19));
-        horizontalLayout_13 = new QHBoxLayout(layoutWidget8);
+        layoutWidget7 = new QWidget(Input_Source_groupBox);
+        layoutWidget7->setObjectName(QStringLiteral("layoutWidget7"));
+        layoutWidget7->setGeometry(QRect(10, 20, 182, 19));
+        horizontalLayout_13 = new QHBoxLayout(layoutWidget7);
         horizontalLayout_13->setSpacing(6);
         horizontalLayout_13->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_13->setObjectName(QStringLiteral("horizontalLayout_13"));
         horizontalLayout_13->setContentsMargins(0, 0, 0, 0);
-        Webcam_source_radioButton = new QRadioButton(layoutWidget8);
+        Webcam_source_radioButton = new QRadioButton(layoutWidget7);
         Webcam_source_radioButton->setObjectName(QStringLiteral("Webcam_source_radioButton"));
         Webcam_source_radioButton->setChecked(true);
 
         horizontalLayout_13->addWidget(Webcam_source_radioButton);
 
-        Image_source_radioButton = new QRadioButton(layoutWidget8);
+        Image_source_radioButton = new QRadioButton(layoutWidget7);
         Image_source_radioButton->setObjectName(QStringLiteral("Image_source_radioButton"));
 
         horizontalLayout_13->addWidget(Image_source_radioButton);
 
-        Video_source_radioButton = new QRadioButton(layoutWidget8);
+        Video_source_radioButton = new QRadioButton(layoutWidget7);
         Video_source_radioButton->setObjectName(QStringLiteral("Video_source_radioButton"));
 
         horizontalLayout_13->addWidget(Video_source_radioButton);
@@ -1015,6 +1060,20 @@ public:
         Laplacian->setGeometry(QRect(1192, 60, 65, 17));
         Laplacian->setChecked(true);
         MainWindow->setCentralWidget(centralWidget);
+        label->raise();
+        segmented_image_label->raise();
+        Segmentation_groupBox->raise();
+        Modes_groupbox->raise();
+        Color_spaces_groupBox->raise();
+        Bottom_line_box->raise();
+        Capture_clean_net_pushButton->raise();
+        Input_Source_groupBox->raise();
+        Gradient_equalizer_checkBox->raise();
+        Morphological_gradient_equalizer_checkBox->raise();
+        Morphological_sharpen_checkBox->raise();
+        Laplacian->raise();
+        Laplacian_box->raise();
+        Sobel_box->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1400, 21));
@@ -1039,6 +1098,7 @@ public:
         QObject::connect(Sobel_weight_dx_horizontalSlider, SIGNAL(valueChanged(int)), Sobel_weight_dx_lcdNumber, SLOT(display(int)));
         QObject::connect(Sobel_weight_dy_horizontalSlider, SIGNAL(valueChanged(int)), Sobel_weight_dy_lcdNumber, SLOT(display(int)));
         QObject::connect(Laplacian_histogram_slider, SIGNAL(valueChanged(int)), Laplacian_histogram_lcdNumber, SLOT(display(int)));
+        QObject::connect(Scharr_threshold_slider, SIGNAL(valueChanged(int)), Scharr_threshold_lcdNumber, SLOT(display(int)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -1097,13 +1157,6 @@ public:
         Adaptive_Thresholding_Kernel_box->setTitle(QApplication::translate("MainWindow", "Kernel size", 0));
         Adaptive_Thresholding_C_box->setTitle(QApplication::translate("MainWindow", "C", 0));
         Local_Otsu_box->setTitle(QApplication::translate("MainWindow", "Local Otsu", 0));
-        Local_Scharr_box->setTitle(QApplication::translate("MainWindow", "Local Scharr", 0));
-        Local_Scharr_Histogram->setTitle(QApplication::translate("MainWindow", "Histogram percentile", 0));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "Number of sub-images", 0));
-        Local_Scharr_dy_checkBox->setText(QApplication::translate("MainWindow", "dy", 0));
-        Local_Scharr_dx_checkBox->setText(QApplication::translate("MainWindow", "dx", 0));
-        Scharr_weight_dx_groupBox->setTitle(QApplication::translate("MainWindow", "Weighting of dx", 0));
-        Scharr_weight_dy_groupBox->setTitle(QApplication::translate("MainWindow", "Weighting of dy", 0));
         Sobel_box->setTitle(QApplication::translate("MainWindow", "Local Sobel", 0));
         Local_Sobel_sub_images_groupBox->setTitle(QApplication::translate("MainWindow", "Number of sub-images", 0));
         Local_Sobel_Histogram->setTitle(QApplication::translate("MainWindow", "Histogram percentile", 0));
@@ -1116,6 +1169,16 @@ public:
         Laplacian_sub_images_groupBox->setTitle(QApplication::translate("MainWindow", "Number of sub-images", 0));
         Laplacian_Histogram->setTitle(QApplication::translate("MainWindow", "Histogram percentile", 0));
         Laplacian_Kernel_size_box->setTitle(QApplication::translate("MainWindow", "Kernel Size", 0));
+        Local_Scharr_box->setTitle(QApplication::translate("MainWindow", " Scharr", 0));
+        Local_Scharr_Histogram->setTitle(QApplication::translate("MainWindow", "Histogram percentile", 0));
+        Scharr_histogram_percentile_checkBox->setText(QString());
+        groupBox_2->setTitle(QApplication::translate("MainWindow", "Number of sub-images", 0));
+        Local_Scharr_dy_checkBox->setText(QApplication::translate("MainWindow", "dy", 0));
+        Local_Scharr_dx_checkBox->setText(QApplication::translate("MainWindow", "dx", 0));
+        Scharr_weight_dx_groupBox->setTitle(QApplication::translate("MainWindow", "Weighting of dx", 0));
+        Scharr_weight_dy_groupBox->setTitle(QApplication::translate("MainWindow", "Weighting of dy", 0));
+        Scharr_threshold_box->setTitle(QApplication::translate("MainWindow", "Edge value threshold", 0));
+        Scharr_threshold_checkBox->setText(QString());
         Capture_clean_net_pushButton->setText(QApplication::translate("MainWindow", "Capture clean net", 0));
         Input_Source_groupBox->setTitle(QApplication::translate("MainWindow", "Input Source", 0));
         Webcam_source_radioButton->setText(QApplication::translate("MainWindow", "WebCam", 0));

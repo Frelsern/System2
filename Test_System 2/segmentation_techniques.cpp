@@ -254,7 +254,7 @@ cv::Mat Global_Scharr(cv::Mat input_img,int histogram_percentile, bool dx_checke
     return output_img;
 }
 
-cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, bool dx_checked,bool dy_checked,bool Otsu,double x_weight, double y_weight)
+cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,bool using_histogram_percentile,int histogram_percentile,bool using_threshold,int threshold, bool dx_checked,bool dy_checked,bool Otsu,double x_weight, double y_weight)
 {
     cv::Mat output_img;
     if((input_img.channels()==1) && (!input_img.empty()))
@@ -448,9 +448,32 @@ cv::Mat Local_Scharr(cv::Mat input_img,int sub_images,int histogram_percentile, 
          {
              output_img = Histogram_seg(histogram_percentile,edge_img,input_img);
          }
-         else
+         else if(using_histogram_percentile)
          {
              output_img = Histogram_seg(histogram_percentile,edge_img);
+         }
+         else if(using_threshold)
+         {
+             int num_pix = edge_img.rows*edge_img.cols;
+             edge_img.copyTo(output_img);
+             output_img.create(edge_img.rows,edge_img.cols,edge_img.type());
+
+             uchar* data = output_img.ptr<uchar>(0);
+             uchar* old_data = edge_img.ptr<uchar>(0);
+             for(int i = 0; i<num_pix;i++)
+             {
+                 if(old_data[i]>threshold)
+                 {
+                     data[i]=255;
+                 }
+                 else
+                 {
+                     data[i] = 0;
+                 }
+
+
+             }
+
          }
     }
 

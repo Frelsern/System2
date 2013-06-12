@@ -144,8 +144,8 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
                                           ,(double)ui->Sobel_weight_dy_horizontalSlider->value()/100);
             break;
         case SCHARR:
-            Segmented_image = Local_Scharr(processed_image,Local_Scharr_numberofSubImages,Local_Scharr_hist_percentile,
-                                           ui->Local_Scharr_dx_checkBox->isChecked(),ui->Local_Scharr_dy_checkBox->isChecked(),
+            Segmented_image = Local_Scharr(processed_image,Local_Scharr_numberofSubImages,ui->Scharr_histogram_percentile_checkBox->isChecked(),Local_Scharr_hist_percentile,
+                                           ui->Scharr_threshold_checkBox->isChecked(),ui->Scharr_threshold_slider->value(),ui->Local_Scharr_dx_checkBox->isChecked(),ui->Local_Scharr_dy_checkBox->isChecked(),
                                            ui->Otsu_in_edge_checkBox->isChecked(),(double)ui->Scharr_weight_dx_horizontalSlider->value()/100
                                            ,(double)ui->Scharr_weight_dy_horizontalSlider->value()/100);
             break;

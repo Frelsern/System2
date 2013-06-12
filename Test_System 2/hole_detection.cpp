@@ -42,6 +42,8 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                 }
             }
         }
+
+
         //temp part to print full region list
         if(region_size_list.size()>0)
         {
