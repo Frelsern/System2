@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     shapetester.cpp \
     growth_detection.cpp \
     colorspaces.cpp \
-    tweaking.cpp
+    tweaking.cpp \
+    image_enhancement.cpp
 
 HEADERS  += mainwindow.h \
     segmentation_techniques.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     shapetester.h \
     growth_detection.h \
     colorspaces.h \
-    tweaking.h
+    tweaking.h \
+    image_enhancement.h
 
 FORMS    += mainwindow.ui
 

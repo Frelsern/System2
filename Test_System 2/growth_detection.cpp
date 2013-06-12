@@ -23,7 +23,7 @@ double percentage_foreground(cv::Mat input_image)
     return percentage;
 }
 
-//for now it finds the percentage of growth on a scale from standard growth to 100% growth
+//Finds the percentage of growth on a scale from standard growth to 100% growth
 double Growth_Detection_algo(double standard_percentage, cv::Mat input_image)
 {
     double input_image_percentage = percentage_foreground(input_image);
