@@ -34,7 +34,7 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                     area = region[4];
 
                     //printed_region_size_list.append(area);
-                    if(area>10)//to prevent small pixel areas to count
+                    if(area>20)//to prevent small pixel areas to count
                     {
                         region_size_list.append(area);
                         region_list.append(region);
@@ -44,7 +44,7 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
         }
 
 
-        //temp part to print full region list
+      /*  //temp part to print full region list
         if(region_size_list.size()>0)
         {
             qSort(region_size_list.begin(),region_size_list.end());
@@ -72,20 +72,55 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
 
                 outputFile.close();
             }
-        }
+        }*/
 
         //can instead make a sorting algorithm and not use an area list AND a coordinate list as now
         if(region_size_list.size()>0)
         {
             qSort(region_size_list.begin(),region_size_list.end());
-            int median_area = region_size_list[(int)region_size_list.size()/2];
+
+            int nominal_val=0;
+            int nominal_val_occurrences=0;
+            for(int i = 0;i<region_size_list.last();i++)//for å gjøre mer robust kan man ta pluss-minus ti størrelser ikke bare counten til den ene verdien
+            {
+                if(region_size_list.count(i)>nominal_val_occurrences)
+                {
+                    nominal_val_occurrences = region_size_list.count(i);
+                    nominal_val = i;
+
+                }
+
+            }
+            qDebug() << "occurences:" << nominal_val_occurrences << "   for value:" << nominal_val;
+
+            //the region size with most occurences is thought to be the nominal region size.
+            //Since some of the region can span two or three masks without there beingh no damage
+            //to the net region that are from 2 times to 4 times the size of the nominal size
+            //is considered suspect regions and larger areas are considered holes.
+            foreach(cv::Vec6i a ,region_list)//[uppermost,furthest down,leftmost,rightmost,area,0]
+            {
+                //drawing on image
+                if(a(4) >= 4*nominal_val)
+                {
+                    cv::circle(output_img,cv::Point(a(2)+(a(3)-a(2))/2,a(0)+(a(1)-a(0))/2),(int)(a(1)-a(0))/2,200,5,8,0);
+                }
+                else if(a(4) >= 2*nominal_val)
+                {
+                    cv::circle(output_img,cv::Point(a(2)+(a(3)-a(2))/2,a(0)+(a(1)-a(0))/2),(int)(a(1)-a(0))/2,0,3,8,0);
+                }
+            }
+
+
+
+            /*int median_area = region_size_list[(int)region_size_list.size()/2];
 
             //qDebug() << "lista har" << region_size_list.size()<<"elementer";
             //int antall=1;
             /*QString suspectFilename = "suspect_region_sizes.txt";
             QFile suspectFile(suspectFilename);
             suspectFile.open(QIODevice::WriteOnly);
-            QTextStream suspectStream(&suspectFile);*/
+            QTextStream suspectStream(&suspectFile);
+
             foreach(cv::Vec6i a ,region_list)//[uppermost,furthest down,leftmost,rightmost,area,0]
             {
                 //region_list.removeFirst();//removes the item being examined
@@ -98,18 +133,9 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                    //drawing on image
                    cv::circle(output_img,cv::Point(a(2)+(a(3)-a(2))/2,a(0)+(a(1)-a(0))/2),(int)(a(1)-a(0))/2,0,4,8,0);
                 }
-               /* if(a(4)<100)
-                {
-                    suspectStream << QString::number(a(4));
-                    suspectStream << ",";
-                    suspectStream << QString::number(a(0));
-                    suspectStream << ",";
-                    suspectStream << QString::number(a(2));
-                    suspectStream << ",";
 
-                }*/
 
-            }
+            }*/
         }
     }
 
