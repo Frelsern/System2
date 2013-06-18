@@ -111,7 +111,7 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
             processed_image = b_space(input_image);
             break;
         }
-        //Smoothing image before thresholding
+        //Smoothing image before segmentation
         if(ui->Gaussian_checkBox->isChecked() && !processed_image.empty())
         {
             cv::GaussianBlur(processed_image,processed_image,cv::Size(Gaussian_kernel_size,Gaussian_kernel_size),0,0,cv::BORDER_DEFAULT);
@@ -183,6 +183,7 @@ void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
                 Segmented_image.copyTo(Seg_copy);
                 cv::dilate(Seg_copy,Segmented_image,cv::Mat(),cv::Point(-1,-1),Dilation_iterations,cv::BORDER_CONSTANT,cv::morphologyDefaultBorderValue());
             }
+
         }
         switch(mode)
         {
@@ -471,20 +472,31 @@ void MainWindow::on_Image_source_radioButton_clicked()
     capWebcam.release();
     //cv::Mat file_image;
     QString fileName = QFileDialog::getOpenFileName(this,tr("Open Image"),".",tr("Image Files (*.png *.jpg *.jpeg *.bmp)"));
-    image_from_file = cv::imread(fileName.toLatin1().data()) ;//.toAscii().data()
-    //file_image = cv::imread(fileName.toLatin1().data()) ;
-
+    image_from_file = cv::imread(fileName.toLatin1().data()) ;
     //change color channel ordering
     cv::cvtColor(image_from_file,image_from_file,CV_BGR2RGB);
     //  Qt image
-    QImage img = QImage((const unsigned char*)(image_from_file.data),
-                        image_from_file.cols,image_from_file.rows,QImage::Format_RGB888);
-    ui->label->setPixmap(QPixmap::fromImage(img));
-    ui->label->resize(ui->label->pixmap()->size());
-    ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+    /*if(image_from_file.type() == CV_8UC3)
+    {
+        QImage img = QImage((const unsigned char*)(image_from_file.data),
+                            image_from_file.cols,image_from_file.rows,QImage::Format_RGB888);
+        ui->label->setPixmap(QPixmap::fromImage(img));
+        ui->label->resize(ui->label->pixmap()->size());
+        ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+    }
+    else
+    {
+        QImage img = QImage((const unsigned char*)(image_from_file.data),
+                            image_from_file.cols,image_from_file.rows,QImage::Format_RGB888);
+        ui->label->setPixmap(QPixmap::fromImage(img));
+        ui->label->resize(ui->label->pixmap()->size());
+        ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image
+    }*/
+
 
     //rolling it like a video to get operations to work, first change color space to a valid one
     tmrTimer = new QTimer(this);
+    qDebug() << "kom hit";
     connect(tmrTimer, SIGNAL(timeout()),this,SLOT(runImage()));
     //tmrTimer->start(1.0/60); //lavprioritet funksjon, hvis systemet bruker lenger tid får det lov til å btuke lenger tid
     tmrTimer->start(100);
@@ -626,7 +638,9 @@ void MainWindow::display_frame(cv::Mat processed_image, cv::Mat segmented_image,
         {
         ui->segmented_image_label->hide();
         QImage color_space_image = QImage((const unsigned char*)(processed_image.data),
-                            processed_image.cols,processed_image.rows,QImage::Format_RGB888);
+                           processed_image.cols,processed_image.rows,QImage::Format_RGB888);
+
+
         ui->label->setPixmap(QPixmap::fromImage(color_space_image));
         ui->label->resize(ui->label->pixmap()->size());
         ui->Bottom_line_box->setGeometry(5,100+ui->label->pixmap()->height(),1330,120);//moving boxes in accordance to size of image

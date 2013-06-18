@@ -154,7 +154,6 @@ private:
     cv::Mat image;
     cv::Mat image_from_file;
 
-
     int Local_Sobel_numberofSubImages;
     int Local_Sobel_hist_percentile;
     int Local_Sobel_dx;

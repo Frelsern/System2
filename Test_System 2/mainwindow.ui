@@ -56,20 +56,20 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>44</y>
-      <width>697</width>
+      <y>50</y>
+      <width>771</width>
       <height>41</height>
      </rect>
     </property>
     <property name="title">
      <string>Segmentation methods</string>
     </property>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>4</x>
-       <y>16</y>
-       <width>679</width>
+       <x>10</x>
+       <y>20</y>
+       <width>752</width>
        <height>19</height>
       </rect>
      </property>
@@ -116,6 +116,13 @@
        <widget class="QRadioButton" name="Adaptive_Thresholding">
         <property name="text">
          <string>Adaptive thresholding</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="Laplacian">
+        <property name="text">
+         <string>Laplacian</string>
         </property>
        </widget>
       </item>
@@ -394,7 +401,7 @@
       </rect>
      </property>
      <property name="title">
-      <string>Segmentation enhancing</string>
+      <string>Segmentation enhancement</string>
      </property>
      <widget class="QCheckBox" name="Dilation_checkBox">
       <property name="geometry">
@@ -1283,8 +1290,6 @@ Edge Segmentation
         </item>
        </layout>
       </widget>
-      <zorder>layoutWidget_11</zorder>
-      <zorder>checkBox</zorder>
      </widget>
      <widget class="QGroupBox" name="Laplacian_Kernel_size_box">
       <property name="geometry">
@@ -1359,7 +1364,7 @@ Edge Segmentation
       <property name="title">
        <string>Histogram percentile</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>12</x>
@@ -1596,7 +1601,7 @@ Edge Segmentation
       <property name="title">
        <string>Edge value threshold</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>12</x>
@@ -1703,75 +1708,52 @@ Edge Segmentation
      </layout>
     </widget>
    </widget>
-   <widget class="QCheckBox" name="Gradient_equalizer_checkBox">
+   <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>60</y>
-      <width>133</width>
-      <height>17</height>
+      <x>770</x>
+      <y>50</y>
+      <width>511</width>
+      <height>41</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Light gradient equalizer</string>
+    <property name="title">
+     <string>Image enhancement</string>
     </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>479</width>
+       <height>19</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_20">
+      <item>
+       <widget class="QCheckBox" name="Gradient_equalizer_checkBox">
+        <property name="text">
+         <string>Light gradient equalizer</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="Morphological_gradient_equalizer_checkBox">
+        <property name="text">
+         <string>Morphological light gradient equalizer</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="Morphological_sharpen_checkBox">
+        <property name="text">
+         <string>Morphological sharpen</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
-   <widget class="QCheckBox" name="Morphological_gradient_equalizer_checkBox">
-    <property name="geometry">
-     <rect>
-      <x>840</x>
-      <y>60</y>
-      <width>201</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Morphological light gradient equalizer</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="Morphological_sharpen_checkBox">
-    <property name="geometry">
-     <rect>
-      <x>1044</x>
-      <y>60</y>
-      <width>137</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Morphological sharpen</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="Laplacian">
-    <property name="geometry">
-     <rect>
-      <x>1192</x>
-      <y>60</y>
-      <width>65</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Laplacian</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <zorder>label</zorder>
-   <zorder>segmented_image_label</zorder>
-   <zorder>Segmentation_groupBox</zorder>
-   <zorder>Modes_groupbox</zorder>
-   <zorder>Color_spaces_groupBox</zorder>
-   <zorder>Bottom_line_box</zorder>
-   <zorder>Capture_clean_net_pushButton</zorder>
-   <zorder>Input_Source_groupBox</zorder>
-   <zorder>Gradient_equalizer_checkBox</zorder>
-   <zorder>Morphological_gradient_equalizer_checkBox</zorder>
-   <zorder>Morphological_sharpen_checkBox</zorder>
-   <zorder>Laplacian</zorder>
-   <zorder>Laplacian_box</zorder>
-   <zorder>Sobel_box</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

@@ -7,6 +7,7 @@ colorspaces::colorspaces()
 
 cv::Mat standard_x(cv::Mat input_image)
 {
+
     cv::Mat XYZ,output_image;
     cv::cvtColor(input_image,XYZ,CV_RGB2XYZ);
     output_image.create(XYZ.size(), CV_8U);
