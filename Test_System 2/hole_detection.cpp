@@ -34,17 +34,17 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
                     area = region[4];
 
                     //printed_region_size_list.append(area);
-                    //if(area>20)//to prevent small pixel areas to count
-                    //{
+                    if(area>20)//to prevent small pixel areas to count
+                    {
                         region_size_list.append(area);
                         region_list.append(region);
-                    //}
+                    }
                 }
             }
         }
 
 
-        //temp part to print full region list
+      /*  //temp part to print full region list
         if(region_size_list.size()>0)
         {
             qSort(region_size_list.begin(),region_size_list.end());
@@ -72,7 +72,7 @@ cv::Mat Hole_detection_algo(cv::Mat input_img)
 
                 outputFile.close();
             }
-        }
+        }*/
 
         //can instead make a sorting algorithm and not use an area list AND a coordinate list as now
         if(region_size_list.size()>0)
