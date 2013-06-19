@@ -59,9 +59,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::process_frame(cv::Mat b4_tweak_input_image)
 {
-        //cv::Mat input_image = tweak_video_frame(b4_tweak_input_image);
-        cv::Mat input_image;
-        b4_tweak_input_image.copyTo(input_image);
+        cv::Mat input_image = tweak_video_frame(b4_tweak_input_image);
+        //cv::Mat input_image;
+        //b4_tweak_input_image.copyTo(input_image);
 
         cv::Mat processed_image,Segmented_image,hole_detected_image;
         cv::Mat lab_image;
